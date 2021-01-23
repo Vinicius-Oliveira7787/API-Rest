@@ -1,20 +1,17 @@
 using System;
 using System.Collections.Generic;
 using Domain.Common;
-using Domain.Users;
 
 namespace Domain.Teachers
 {
     public class TeachersService : Service<Teacher>, ITeachersService
     {
         private readonly ITeachersRepository _teachersRepository;
-        private readonly IUsersService _usersService;
 
 
-        public TeachersService(ITeachersRepository teachersRepository, IUsersService usersService) : base(teachersRepository)
+        public TeachersService(ITeachersRepository teachersRepository) : base(teachersRepository)
         {
             _teachersRepository = teachersRepository;
-            _usersService = usersService;
         }
         
         public CreatedEntityDTO Create(string name, string cpf)
@@ -32,14 +29,6 @@ namespace Domain.Teachers
                 return new CreatedEntityDTO(teacherVal.errors);
             }
 
-            var userCreated = _usersService.Create(Profile.Teacher, cpf, cpf);
-            if (!userCreated.IsValid)
-            {
-                return new CreatedEntityDTO(userCreated.Errors);
-            }
-
-            var user = _usersService.Get(userCreated.Id);
-            teacher.LinkUser(user);
             _teachersRepository.Add(teacher);
             return new CreatedEntityDTO(teacher.Id);
         }
@@ -48,12 +37,6 @@ namespace Domain.Teachers
         {
             var teacher = _teachersRepository.Get(id);
             if (teacher == null) { return false; }
-
-            var user = _usersService.Get(teacher.UserId);
-            if (user != null)
-            {
-                _usersService.Remove(user.Id);
-            }
 
             if (_teachersRepository.Get(teacher.Id) != null)
             {
