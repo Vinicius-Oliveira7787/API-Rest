@@ -1,10 +1,27 @@
+﻿using System;
 using Domain.Common;
 
 namespace Domain.Students
 {
-    public class StudentsRepository : Repository<Student>, IStudentsRepository
+    public class StudentRepository : IStudentsRepository
     {
-        public StudentsRepository(IRepository<Student> repository) : base(repository)
-        {}
+        private readonly IRepository<Student> _repository;
+        public StudentRepository(IRepository<Student> repository) 
+        {
+            _repository = repository;
+        }
+
+        public void Add(Student student)
+        {
+            _repository.Add(student);
+        }
+
+        public Student Get(Func<Student, bool> predicate) {
+            return _repository.Get(predicate);
+        }
+
+        public Student Get(Guid id) {
+            return _repository.Get(id);
+        }
     }
 }

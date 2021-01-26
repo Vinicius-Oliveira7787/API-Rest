@@ -1,37 +1,30 @@
+﻿using System;
 using System.Collections.Generic;
-using Domain.Classrooms;
-using Domain.Common;
-using System;
-using Domain.Exams;
+using System.Linq;
+using Domain.People;
 
 namespace Domain.Students
 {
     public class Student : Person
     {
-        public Guid StudentId { get; set; } = Guid.NewGuid();
-        
-        public virtual IList<ClassroomStudent> Classrooms { get; set; } = new List<ClassroomStudent>();
+        public int Goals { get; private set; }
+        // A propriedade virtual indica ao EF que é uma propriedade de navegação
+        public virtual Team Team { get; private set; }
+        public Guid TeamId { get; private set; }
 
-        public Student(string name, string cpf, string regist) : base(name, cpf)
+        public Student(Guid teamId, string name) : base(name)
         {
-            
+            TeamId = teamId;
         }
 
-        protected Student() : base("", "") {}
-
-        public (List<string> errors, bool isValid) Validate()
+        public (IList<string> errors, bool isValid) Validate()
         {
-            var errs = new List<string>(); 
-            
+            var errors = new List<string>();
             if (!ValidateName())
             {
-                errs.Add("Invalid name");
+                errors.Add("Nome inválido.");
             }
-            if (!ValidateCPF())
-            {
-                errs.Add("Invalid CPF");
-            }
-            return (errs, errs.Count == 0);
+            return (errors, errors.Count == 0);
         }
     }
 }

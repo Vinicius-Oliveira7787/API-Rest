@@ -1,6 +1,5 @@
-using Microsoft.AspNetCore.Mvc;
-using Domain.Auth;
-using WebAPI.Token;
+﻿using Microsoft.AspNetCore.Mvc;
+using Domain.Authentication;
 
 namespace WebAPI.Controllers.Auth
 {
@@ -8,26 +7,24 @@ namespace WebAPI.Controllers.Auth
     [Route("[controller]")]
     public class AuthController : ControllerBase
     {
-        public readonly IAuthService _authService;
+        private readonly IAuthService _authService;
+        
         public AuthController(IAuthService authService)
         {
             _authService = authService;
         }
-        
+
         [HttpPost("login")]
         public IActionResult Login(LoginRequest request)
-        {
-            
-            var response = _authService.Login(request.Username, request.Password);
+        {   
+            var response = _authService.Login(request.Email, request.Password);
 
             if (!response.IsValid)
             {
-                return BadRequest("Username ou senha inválido");
+                return BadRequest("Email ou senha inválido");
             }
-
-            var token = TokenService.GenerateToken(response.User);
-
-            return Ok(token);
+            
+            return Ok(response.UserId);
         }
     }
 }
