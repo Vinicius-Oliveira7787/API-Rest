@@ -9,11 +9,8 @@ namespace Domain.Exams
         public List<string> Aswers { get; private set; }
         public double Score { get; private set; }
 
-        public Exam(List<string> questions, List<string> aswers, double score) {
+        public Exam(List<string> questions) {
             Questions = questions;
-            Aswers = new List<string>(questions.Count);
-            Aswers = aswers;
-            Score = score;
         }
     }
 }

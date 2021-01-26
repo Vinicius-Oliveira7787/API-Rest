@@ -1,18 +1,24 @@
+using System;
+using System.Collections.Generic;
+
 namespace Domain.Exams
 {
-    public class ExamsService  {
-        
+    public class ExamsService : IExamsService {
+        private Exam _exam { get; set; }
 
-        public bool AnswerQuestions(List<string> aswers) {
-            if (Aswers != null || aswers == null) {
-                return false;
+        public CreatedExamDTO Create(List<string> questions, Guid id) {
+            _exam = new Exam(questions);
+            var validation = _exam.Validate();
+            
+            if (validation.isValid) {
+                return new CreatedExamDTO(id);
             }
 
-            for (int i = 0; i < aswers.Count; i++) {
-                Aswers[i] = aswers[i];
-            }
+            return new CreatedExamDTO(validation.errors);
+        }
 
-            return true;
+        public bool AnswerQuestions(List<string> aswers) {            
+            _exam.Aswers = aswers;
         }
 
         public int CheckCorrectAswers() {

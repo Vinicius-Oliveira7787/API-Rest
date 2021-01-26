@@ -10,10 +10,12 @@ namespace WebAPI.Controllers.Users
     public class UsersController : ControllerBase
     {
         private readonly IUsersService _usersService;
+        private readonly IExamService _examsService;
         
-        public UsersController(IUsersService usersService)
+        public UsersController(IUsersService usersService, IExamService examService)
         {
             _usersService = usersService;
+            _examsService = examsService;
         }
 
         [HttpPost]
