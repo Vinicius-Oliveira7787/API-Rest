@@ -1,10 +1,10 @@
+using System;
 using System.Collections.Generic;
 
 namespace Domain.Exams
 {
     public interface IExamsService  {
-        bool AnswerQuestions(List<string> aswers);
-
-        int CheckCorrectAswers() ;
+        Exam GetById(Guid id);
+        CreatedExamsDTO Create(List<string> questions);
     }
 }

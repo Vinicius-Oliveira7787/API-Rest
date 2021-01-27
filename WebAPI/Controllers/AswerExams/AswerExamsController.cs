@@ -3,23 +3,31 @@ using Microsoft.Extensions.Primitives;
 using Domain.Users;
 using System;
 using Domain.Exams;
+using Domain.AswerExams;
 
 namespace WebAPI.Controllers.Exams
 {
     [ApiController]
     [Route("[controller]")]
-    public class ExamsController : ControllerBase
+    public class AswerExamsController : ControllerBase
     {
         private readonly IUsersService _usersService;
         private readonly IExamsService _examsService;
+        private readonly IAswerExamsService _aswerExamsService;
         
-        public ExamsController(IUsersService usersService, IExamsService examsService) {
-            _usersService = usersService;
+        public AswerExamsController ( 
+            IUsersService usersService, 
+            IExamsService examsService, 
+            IAswerExamsService aswerExamsService 
+        )
+        {
             _examsService = examsService;
+            _usersService = usersService;
+            _aswerExamsService = aswerExamsService;
         }
 
         [HttpPost]
-        public IActionResult CreateExam(CreateExamRequest request) {
+        public IActionResult CreateExamAswers(CreateAswerExamsRequest request) {
             StringValues userId;
             if(!Request.Headers.TryGetValue("UserId", out userId)) {
                 return Unauthorized();
@@ -31,30 +39,40 @@ namespace WebAPI.Controllers.Exams
                 return Unauthorized();
             }
 
-            if (user.Profile == Profile.Student) {
+            if (user.Profile == Profile.Student)
+            {
                 return Unauthorized();
             }
 
-            var response = _examsService.Create(request.Questions);
+            var exam = _examsService.GetById(request.ExamId);
 
-            if (!response.IsValid) {
+            if (exam == null)
+            {
+                return NotFound();
+            }
+            
+            var response = _aswerExamsService.Create(request.QuestionsAswers, exam);
+
+            if (!response.IsValid)
+            {
                 return BadRequest(response.Errors);
             }
             
-            return NoContent();
+            return Ok();
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(Guid id) {
-            var exam = _examsService.GetById(id);
+        public IActionResult GetScore(Guid id) {
+            var aswerExams = _aswerExamsService.GetById(id);
 
-            if (exam == null) {
+            if (aswerExams.aswerExam == null || aswerExams.score == null)
+            {
                 return NotFound();
             }
 
-            return Ok();
+            return Ok(aswerExams.score);
         }
-        
+
         // [HttpDelete("{id}")]
         // public IActionResult Remove(Guid id)
         // {

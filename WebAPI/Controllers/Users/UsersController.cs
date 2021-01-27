@@ -10,12 +10,10 @@ namespace WebAPI.Controllers.Users
     public class UsersController : ControllerBase
     {
         private readonly IUsersService _usersService;
-        private readonly IExamService _examsService;
         
-        public UsersController(IUsersService usersService, IExamService examService)
+        public UsersController(IUsersService usersService)
         {
             _usersService = usersService;
-            _examsService = examsService;
         }
 
         [HttpPost]
@@ -45,8 +43,6 @@ namespace WebAPI.Controllers.Users
                 request.Email,
                 request.Password
             );
-
-            var createExam = 
 
             if (!response.IsValid)
             {

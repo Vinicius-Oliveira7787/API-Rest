@@ -11,6 +11,7 @@ namespace Domain.Users
         public Profile Profile { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
+        public double Score { get; set; } = 0;
 
         public User(string name, string password, string email, Profile profile) : base(name)
         {

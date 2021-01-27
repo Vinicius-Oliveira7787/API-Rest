@@ -37,6 +37,15 @@ namespace Infra
             builder
                 .HasIndex(user => user.Email)
                 .IsUnique();
+
+            builder
+                .Property(user => user.Profile == 0)
+                .HasMaxLength(100);
+
+            builder
+                .Property(user => user.Score)
+                .IsRequired()
+                .HasMaxLength(10);
         }
     }
 }
