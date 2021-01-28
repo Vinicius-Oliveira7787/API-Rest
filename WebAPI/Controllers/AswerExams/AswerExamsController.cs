@@ -39,8 +39,7 @@ namespace WebAPI.Controllers.Exams
                 return Unauthorized();
             }
 
-            if (user.Profile == Profile.Student)
-            {
+            if (user.Profile == Profile.Teacher) {
                 return Unauthorized();
             }
 
@@ -58,6 +57,7 @@ namespace WebAPI.Controllers.Exams
                 return BadRequest(response.Errors);
             }
             
+            // auto enviar neste Ok() a nota do aluno
             return Ok();
         }
 

@@ -49,7 +49,7 @@ namespace WebAPI.Controllers.Users
                 return BadRequest(response.Errors);
             }
             
-            return NoContent();
+            return Ok(response.Id);
         }
 
         [HttpGet("{id}")]
