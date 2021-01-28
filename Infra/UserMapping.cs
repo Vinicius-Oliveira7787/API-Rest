@@ -38,9 +38,9 @@ namespace Infra
                 .HasIndex(user => user.Email)
                 .IsUnique();
 
-            builder
-                .Property(user => user.Profile == 0)
-                .HasMaxLength(100);
+            // builder
+            //     .Property(user => user.Profile == Profile.Student)
+            //     .HasMaxLength(100);
 
             builder
                 .Property(user => user.BulletinNote)

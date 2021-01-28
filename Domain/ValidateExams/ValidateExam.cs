@@ -7,7 +7,7 @@ namespace Domain.ValidateExams {
     public class ValidateExam : Entity {
         public List<string> Questions { get; private set; }
 
-        protected ValidateExam(List<string> questions)
+        public ValidateExam(List<string> questions)
         {
             Questions = questions;
         }
