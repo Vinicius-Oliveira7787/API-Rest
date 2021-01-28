@@ -1,11 +1,11 @@
-using Domain.Exams;
+using Domain.AswerExams;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infra
 {
-    public class ExamMapping : IEntityTypeConfiguration<Exam> {
-        public void Configure(EntityTypeBuilder<Exam> builder)
+    public class AswerExamsMapping : IEntityTypeConfiguration<AswerExam> {
+        public void Configure(EntityTypeBuilder<AswerExam> builder)
         {
             builder
                 .Property(exam => exam.Questions)

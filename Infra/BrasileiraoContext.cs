@@ -1,4 +1,5 @@
 using System.Reflection;
+using Domain.AswerExams;
 using Domain.Exams;
 using Domain.Users;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ namespace Infra
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Exam> Exams { get; set; }
+        public DbSet<AswerExam> AswerExams { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

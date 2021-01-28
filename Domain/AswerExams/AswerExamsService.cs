@@ -20,12 +20,12 @@ namespace Domain.AswerExams
             var validation = _exam.Validate();
             
             if (!validation.isValid) {
-                return new CreatedAswerExamsDTO(validation.errors);
+                return new CreatedAswerExamsDTO(validation.message);
             }
 
                 _score = CorrectExam(exam);
                 if (_score == null) {
-                    return new CreatedAswerExamsDTO(validation.errors);
+                    return new CreatedAswerExamsDTO(validation.message);
                 }
 
                 return new CreatedAswerExamsDTO(_exam.Id);
@@ -35,7 +35,8 @@ namespace Domain.AswerExams
             int correctAswersCounter = 0;
             
             for (int i = 0; i < exam.Questions.Count; i++) {
-                if (exam.Questions[i] == _exam.Aswers[i]) {
+                //   TeacherTemplate  /    StudentAswers
+                if (exam.Questions[i] == _exam.Questions[i]) {
                     correctAswersCounter++;
                 }
             }

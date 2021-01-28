@@ -26,7 +26,7 @@ namespace WebAPI.Controllers.Users
         public IActionResult GetStudentsThatPassed()
         {
             var users = _usersRepository
-                .Get(users => users.Score >= 7 && users.Profile == Profile.Student);
+                .Get(users => users.BulletinNote >= 7 && users.Profile == Profile.Student);
             
             return Ok(users);
         }

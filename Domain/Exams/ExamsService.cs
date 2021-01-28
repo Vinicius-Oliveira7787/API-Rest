@@ -19,7 +19,7 @@ namespace Domain.Exams
                 return new CreatedExamsDTO(_exam.Id);
             }
 
-            return new CreatedExamsDTO(validation.errors);
+            return new CreatedExamsDTO(validation.message);
         }
 
         public Exam GetById(Guid id) {

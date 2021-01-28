@@ -1,14 +1,21 @@
 using System.Collections.Generic;
 using Domain.Common;
+using Domain.ValidateExams;
 
 namespace Domain.AswerExams
 {
-    public class AswerExam : Entity
+    public class AswerExam : ValidateExam
     {
-        public List<string> Aswers { get; set; } = new List<string>();
+        public AswerExam(List<string> aswers) : base(aswers) {}
 
-        public AswerExam(List<string> aswers) {
-            Aswers = aswers;
+        public (IList<string> message, bool isValid) Validate() {
+            var validation = ValidateTest();
+
+            if (!validation.isValid) {
+                return (validation.message, validation.isValid);
+            }
+
+            return (validation.message, validation.isValid);
         }
     }
 }

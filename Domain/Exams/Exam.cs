@@ -1,14 +1,24 @@
 using System.Collections.Generic;
+using System.Text;
+using System.Text.RegularExpressions;
 using Domain.Common;
+using Domain.ValidateExams;
 
 namespace Domain.Exams
 {
-    public class Exam : Entity
+    public class Exam : ValidateExam
     {
-        public List<string> Questions { get; private set; } = new List<string>();
 
-        public Exam(List<string> questions) {
-            Questions = questions;
+        public Exam(List<string> questions) : base(questions) {}
+
+            public (IList<string> message, bool isValid) Validate() {
+            var validation = ValidateTest();
+            
+            if (!validation.isValid) {
+                return (validation.message, validation.isValid);
+            }
+
+            return (validation.message, validation.isValid);
         }
     }
 }

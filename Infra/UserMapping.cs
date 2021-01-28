@@ -43,7 +43,7 @@ namespace Infra
                 .HasMaxLength(100);
 
             builder
-                .Property(user => user.Score)
+                .Property(user => user.BulletinNote)
                 .IsRequired()
                 .HasMaxLength(10);
         }

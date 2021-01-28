@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
 using Domain.People;
@@ -8,9 +9,11 @@ namespace Domain.Users
 {
     public class User : Person
     {
-        public Profile Profile { get; set; }
-        public string Password { get; set; }
-        public string Email { get; set; }
+        public Profile Profile { get; private set; }
+        public string Password { get; private set; }
+        public string Email { get; private set; }
+        public double BulletinNote { get; private set; }
+        private List<double> _examsScore { get; set; }
 
         public User(string name, string password, string email, Profile profile) : base(name)
         {
@@ -18,11 +21,33 @@ namespace Domain.Users
             Email = email;
             Profile = profile;
         }
-        // ToDo: a cada prova respondida add 1 prova feita e recalcular a nota do boletim 
-        // apenas para aqueles que forem student, adicionar 2 CTOR 1 para studant outro para teacher
 
-        private bool ValidateEmail()
-        {
+        public void CalculateBulletinNote(double score) {
+            var validation = ValidateExam(score);
+
+            if (validation)
+            {
+                _examsScore.Add(score);
+                var calculateBulletinNote = _examsScore.Sum() / _examsScore.Count;
+                BulletinNote = calculateBulletinNote;
+            }
+        }
+
+        private bool ValidateExam(double score) {
+            if (Profile == Profile.Teacher)
+            {
+                return false;
+            }
+
+            if (score < 0 || score > 10)
+            {
+                return false;
+            }
+
+            return true;
+        }
+        
+        private bool ValidateEmail() {
             return Regex.IsMatch(
                 Email,
                 @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z",
@@ -30,16 +55,13 @@ namespace Domain.Users
             );
         }
 
-        public (IList<string> errors, bool isValid) Validate()
-        {
+        public (IList<string> errors, bool isValid) Validate() {
             var errors = new List<string>();
-            if (!ValidateName())
-            {
+            if (!ValidateName()) {
                 errors.Add("Nome inválido.");
             }
 
-            if (!ValidateEmail())
-            {
+            if (!ValidateEmail()) {
                 errors.Add("Email inválido.");
             }
 
