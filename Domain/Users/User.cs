@@ -11,7 +11,6 @@ namespace Domain.Users
         public Profile Profile { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
-        public double Score { get; set; } = 0;
 
         public User(string name, string password, string email, Profile profile) : base(name)
         {
@@ -19,6 +18,8 @@ namespace Domain.Users
             Email = email;
             Profile = profile;
         }
+        // ToDo: a cada prova respondida add 1 prova feita e recalcular a nota do boletim 
+        // apenas para aqueles que forem student, adicionar 2 CTOR 1 para studant outro para teacher
 
         private bool ValidateEmail()
         {
