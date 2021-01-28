@@ -1,4 +1,4 @@
-# [Desafio Código para todxs](https://www.serasa.com.br/) 
+# Desafio Código para todxs 
 
 ## Propósito 
 
