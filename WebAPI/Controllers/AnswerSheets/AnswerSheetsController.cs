@@ -4,23 +4,23 @@ using Domain.Users;
 using System;
 using Domain.AnswerSheets;
 
-namespace WebAPI.Controllers.Teams
+namespace WebAPI.Controllers.AnswerSheets
 {
     [ApiController]
     [Route("[controller]")]
-    public class TeamsController : ControllerBase
+    public class AnswerSheetsController : ControllerBase
     {
-        private readonly IAnswerSheetsService _teamsService;
+        private readonly IAnswerSheetsService _answerSheetsService;
         private readonly IUsersService _usersService;
         
-        public TeamsController(IUsersService usersService, IAnswerSheetsService teamsService)
+        public AnswerSheetsController(IUsersService usersService, IAnswerSheetsService answerSheetsService)
         {
             _usersService = usersService;
-            _teamsService = teamsService;
+            _answerSheetsService = answerSheetsService;
         }
 
         [HttpPost]
-        public IActionResult Create(CreateTeamRequest request)
+        public IActionResult Create(CreateAnswerSheetRequest request)
         {
             StringValues userId;
             if(!Request.Headers.TryGetValue("UserId", out userId))
@@ -40,7 +40,7 @@ namespace WebAPI.Controllers.Teams
                 return Unauthorized();
             }
 
-            var response = _teamsService.Create(request.Name, request.Players);
+            var response = _answerSheetsService.Create(request.Name, request.Questions);
 
             if (!response.IsValid)
             {

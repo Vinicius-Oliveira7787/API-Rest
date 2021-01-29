@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using Domain.Answers;
 using Domain.AnswerSheets;
 using Domain.Common;
 
@@ -8,8 +10,8 @@ namespace Domain.Questions
 {
     public class Question : Entity
     {
-        public double Score { get; private set; }
-        public virtual AnswerSheet Team { get; private set; }
+        public virtual AnswerSheet AnswerSheet { get; private set; }
+        public virtual Answer Answer { get; private set; }
         public Guid AswerSheetId { get; private set; }
         public string Aswer { get; private set; }
 
@@ -21,39 +23,28 @@ namespace Domain.Questions
         public (IList<string> errors, bool isValid) Validate()
         {
             var errors = new List<string>();
-            if (!ValidateAswer())
+            var validation = ValidateAswer();
+            
+            if (!validation.isValid)
             {
-                errors.Add("resposta inválida.");
+                errors.Add($"{validation.message}");
             }
+
             return (errors, errors.Count == 0);
         }
 
-        private bool ValidateAswer()
+        private (string message, bool isValid) ValidateAswer()
         {
-            if (string.IsNullOrEmpty(Aswer))
-            {
-                return false;
-            }
+            var regexLetters = Regex
+                .IsMatch(Aswer.Normalize(NormalizationForm.FormD), @"^([a-zA-Z]\p{M}*)+$");
+            var regexNumbers = Regex.IsMatch(Aswer, @"^\d+$");
 
-            var words = Aswer.Split(' ');
-            if (words.Length < 2)
+            if (!regexLetters && !regexNumbers)
             {
-                return false;
+                return ("Resposta inválida, somente números ou letras.", false);
             }
-
-            foreach (var word in words)
-            {
-                if (word.Trim().Length < 2)
-                {
-                    return false;
-                }
-                if (word.Any(x => !char.IsLetter(x)))
-                {
-                    return false;
-                }
-            }
-
-            return true;
+            
+            return ("OK", true);
         }
     }
 }

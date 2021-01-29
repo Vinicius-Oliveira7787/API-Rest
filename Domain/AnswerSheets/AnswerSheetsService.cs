@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Domain.AnswerSheets
 {
@@ -23,6 +24,10 @@ namespace Domain.AnswerSheets
             }
 
             return new CreatedAnswerSheetDTO(AnswerSheetValidation.errors);
+        }
+
+        public AnswerSheet GetById(Guid id) {
+            return _answerSheetsRepository.Get(id);
         }
     }
 }

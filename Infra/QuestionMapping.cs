@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infra
 {
-    public class PlayerMapping : IEntityTypeConfiguration<Question>
+    public class QuestionMapping : IEntityTypeConfiguration<Question>
     {
         public void Configure(EntityTypeBuilder<Question> builder)
         {
             builder
-                .Property(player => player.Aswer)
+                .Property(question => question.Aswer)
                 .IsRequired();
         }
     }

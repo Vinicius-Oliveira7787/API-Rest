@@ -4,53 +4,31 @@ using System.Linq;
 using Domain.Common;
 using Domain.Questions;
 
-namespace Domain.AnswerSheets
+namespace Domain.Answers
 {
-    public class AnswerSheet : Entity
+    public class Answer : Entity
     {
-        public string Title { get; set; }
-        public virtual IList<Question> Questions { get; set; }
+        public double Score { get; set; }
+        public virtual IList<Question> Answers { get; set; }
 
-        public AnswerSheet(string name, IList<string> questions)
+        public Answer(string name, IList<string> answer)
         {
-            Title = name;
-            if (questions != null)
+            if (Answers != null)
             {
-                Questions = questions
+                Answers = answer
                     .Select(aswer => new Question(Id, aswer))
                     .ToList();
             }
         }
 
-        protected AnswerSheet() {}
-
-        protected bool ValidateName()
-        {
-            if (string.IsNullOrEmpty(Title))
-            {
-                return false;
-            }
-
-            return true;
-        }
+        protected Answer() {}
 
         private (string message, bool isValid) ValidateAanswer()
         {
-            if (Questions == null)
-            {
-                return ("emptyAnswerSheet", false);
-            }
-
-            var emptyAanswerValidation = Questions.Any(question => question == null);
-            if (emptyAanswerValidation)
-            {
-                return ("Missing Question(s)", false);
-            }
-
             (string message, bool isValid) validation = ("", true);
-            for (int i = 0; i < Questions.Count; i++)
+            for (int i = 0; i < Answers.Count; i++)
             {
-                var temporary = Questions[i].Validate();
+                var temporary = Answers[i].Validate();
                 if (!temporary.isValid)
                 {
                     validation.message = temporary.errors.ToString();
@@ -70,10 +48,6 @@ namespace Domain.AnswerSheets
         public (IList<string> errors, bool isValid) Validate()
         {
             var errors = new List<string>();
-            if (!ValidateName())
-            {
-                errors.Add("Title not found");
-            }
             
             var validateAanswer = ValidateAanswer();
             if (!validateAanswer.isValid)
