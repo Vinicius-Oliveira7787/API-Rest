@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Primitives;
 using Domain.Users;
-using System;
 using Domain.Questions;
 
 namespace WebAPI.Controllers.Questions

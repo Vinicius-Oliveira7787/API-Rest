@@ -31,4 +31,4 @@ For register the answer sheet of the exam is necessary the id of a teacher, afte
 
 After answered the exam, the program inform you with the score.
 
-![](https://media.discordapp.net/attachments/763179298323431484/804825546298621972/Postman_29_01_2021_18_26_15.png?width=980&height=513)
+![](https://media.discordapp.net/attachments/763179298323431484/804835619439378502/Captura_de_tela_2021-01-29_190039.png?width=850&height=476)
