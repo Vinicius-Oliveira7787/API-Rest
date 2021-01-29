@@ -3,24 +3,25 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infra.Migrations
 {
-    public partial class firstMigration : Migration
+    public partial class ahhh : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Answer",
+                name: "Answers",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Score = table.Column<double>(type: "float", maxLength: 10, nullable: false)
+                    Score = table.Column<double>(type: "float", maxLength: 10, nullable: false),
+                    AswerSheetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Answer", x => x.Id);
+                    table.PrimaryKey("PK_Answers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Teams",
+                name: "AnswerSheets",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -28,7 +29,7 @@ namespace Infra.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Teams", x => x.Id);
+                    table.PrimaryKey("PK_AnswerSheets", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -47,28 +48,28 @@ namespace Infra.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Players",
+                name: "Questions",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     AnswerSheetId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    AnswerId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     AswerSheetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Aswer = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Aswer = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AnswerId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Players", x => x.Id);
+                    table.PrimaryKey("PK_Questions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Players_Answer_AnswerId",
+                        name: "FK_Questions_Answers_AnswerId",
                         column: x => x.AnswerId,
-                        principalTable: "Answer",
+                        principalTable: "Answers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Players_Teams_AnswerSheetId",
+                        name: "FK_Questions_AnswerSheets_AnswerSheetId",
                         column: x => x.AnswerSheetId,
-                        principalTable: "Teams",
+                        principalTable: "AnswerSheets",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -76,16 +77,16 @@ namespace Infra.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Email", "Name", "Password", "Profile" },
-                values: new object[] { new Guid("aa43d63e-0b06-4490-b884-29e8cbda7043"), "ademir@bol.com", "Ademir Ademilson", "0192023A7BBD73250516F069DF18B500", 0 });
+                values: new object[] { new Guid("f4e6c4e1-3e8b-48e6-9c34-07bceb6b76d6"), "ademir@bol.com", "Ademir Ademilson", "0192023A7BBD73250516F069DF18B500", 0 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Players_AnswerId",
-                table: "Players",
+                name: "IX_Questions_AnswerId",
+                table: "Questions",
                 column: "AnswerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Players_AnswerSheetId",
-                table: "Players",
+                name: "IX_Questions_AnswerSheetId",
+                table: "Questions",
                 column: "AnswerSheetId");
 
             migrationBuilder.CreateIndex(
@@ -98,16 +99,16 @@ namespace Infra.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Players");
+                name: "Questions");
 
             migrationBuilder.DropTable(
                 name: "Users");
 
             migrationBuilder.DropTable(
-                name: "Answer");
+                name: "Answers");
 
             migrationBuilder.DropTable(
-                name: "Teams");
+                name: "AnswerSheets");
         }
     }
 }

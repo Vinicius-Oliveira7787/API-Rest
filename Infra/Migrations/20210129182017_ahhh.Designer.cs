@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.Migrations
 {
     [DbContext(typeof(BrasileiraoContext))]
-    [Migration("20210129172543_testing")]
-    partial class testing
+    [Migration("20210129182017_ahhh")]
+    partial class ahhh
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -41,6 +41,9 @@ namespace Infra.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AswerSheetId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<double>("Score")
@@ -114,7 +117,7 @@ namespace Infra.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ceb996ae-6f10-445e-9062-a834b9ad47a1"),
+                            Id = new Guid("f4e6c4e1-3e8b-48e6-9c34-07bceb6b76d6"),
                             Email = "ademir@bol.com",
                             Name = "Ademir Ademilson",
                             Password = "0192023A7BBD73250516F069DF18B500",
@@ -124,15 +127,13 @@ namespace Infra.Migrations
 
             modelBuilder.Entity("Domain.Questions.Question", b =>
                 {
-                    b.HasOne("Domain.Answers.Answer", "Answer")
+                    b.HasOne("Domain.Answers.Answer", null)
                         .WithMany("Answers")
                         .HasForeignKey("AnswerId");
 
                     b.HasOne("Domain.AnswerSheets.AnswerSheet", "AnswerSheet")
                         .WithMany("Questions")
                         .HasForeignKey("AnswerSheetId");
-
-                    b.Navigation("Answer");
 
                     b.Navigation("AnswerSheet");
                 });
