@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Domain.Authentication;
 using Domain.AnswerSheets;
 using Microsoft.EntityFrameworkCore;
+using Domain.Answers;
 
 namespace WebAPI
 {
@@ -21,7 +22,6 @@ namespace WebAPI
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors(options =>
@@ -39,22 +39,21 @@ namespace WebAPI
 
             services.AddControllers();
 
-            // services.AddSingleton(typeof (IRepository<>), typeof (RepositoryInMemory<>));
             services.AddScoped(typeof (IRepository<>), typeof (Repository<>));
             services.AddScoped<IUsersRepository, UsersRepository>();
             services.AddScoped<IUsersService, UsersService>();
+            services.AddScoped<IAnswersRepository, AnswersRepository>();
+            services.AddScoped<IAnswersService, AnswersService>();
             services.AddScoped<IAnswerSheetsRepository, AnswerSheetsRepository>();
             services.AddScoped<IAnswerSheetsService, AnswerSheetsService>();
             services.AddScoped<IAuthService, AuthService>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseCors("any");
             using (var db = new BrasileiraoContext())
             {
-                // Este comando irá criar o banco de dados (quando ele ainda não existir)
                 db.Database.Migrate();
             }
 
