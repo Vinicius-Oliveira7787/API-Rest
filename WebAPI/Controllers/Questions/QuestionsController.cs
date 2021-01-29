@@ -4,7 +4,7 @@ using Domain.Users;
 using System;
 using Domain.Questions;
 
-namespace WebAPI.Controllers.Players
+namespace WebAPI.Controllers.Questions
 {
     [ApiController]
     [Route("[controller]")]
@@ -22,23 +22,23 @@ namespace WebAPI.Controllers.Players
         [HttpPost]
         public IActionResult Create(CreateQuestionRequest request)
         {
-            StringValues userId;
-            if(!Request.Headers.TryGetValue("UserId", out userId))
-            {
-                return Unauthorized();
-            }
+            // StringValues userId;
+            // if(!Request.Headers.TryGetValue("UserId", out userId))
+            // {
+            //     return Unauthorized();
+            // }
 
-            var user = _usersService.GetById(Guid.Parse(userId));
+            // var user = _usersService.GetById(Guid.Parse(userId));
 
-            if (user == null)
-            {
-                return Unauthorized();
-            }
+            // if (user == null)
+            // {
+            //     return Unauthorized();
+            // }
 
-            if (user.Profile == Profile.Student)
-            {
-                return Unauthorized();
-            }
+            // if (user.Profile == Profile.Student)
+            // {
+            //     return Unauthorized();
+            // }
 
             var response = _questionsService.Create(request.ExamId, request.Name);
 

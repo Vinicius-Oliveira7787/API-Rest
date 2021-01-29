@@ -1,6 +1,6 @@
 using System;
 
-namespace WebAPI.Controllers.Players
+namespace WebAPI.Controllers.Questions
 {
     public class CreateQuestionRequest
     {
