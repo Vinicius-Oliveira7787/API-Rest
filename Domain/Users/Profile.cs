@@ -2,7 +2,7 @@
 {
     public enum Profile
     {
-        Student = 0,
-        Teacher = 1
+        Teacher = 0,
+        Student = 1
     }
 }

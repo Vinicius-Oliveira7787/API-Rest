@@ -8,7 +8,8 @@ namespace Domain.Users
     {
         private readonly IUsersRepository _usersRepository;
 
-        public UsersService(IUsersRepository usersRepository) {
+        public UsersService(IUsersRepository usersRepository)
+        {
             _usersRepository = usersRepository;
         }
 
@@ -25,7 +26,8 @@ namespace Domain.Users
             var user = new User(name, cryptPassword, email, profile);
             var userValidation = user.Validate();
 
-            if (userValidation.isValid) {
+            if (userValidation.isValid)
+            {
                 _usersRepository.Add(user);
                 return new CreatedUserDTO(user.Id);
             }
@@ -33,7 +35,8 @@ namespace Domain.Users
             return new CreatedUserDTO(userValidation.errors);
         }
         
-        public User GetById(Guid id) {
+        public User GetById(Guid id)
+        {
             return _usersRepository.Get(id);
         }
     }

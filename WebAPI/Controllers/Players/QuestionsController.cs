@@ -1,23 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Primitives;
 using Domain.Users;
 using System;
-using Microsoft.Extensions.Primitives;
+using Domain.Questions;
 
-namespace WebAPI.Controllers.Users
+namespace WebAPI.Controllers.Players
 {
     [ApiController]
     [Route("[controller]")]
-    public class UsersController : ControllerBase
+    public class QuestionsController : ControllerBase
     {
+        private readonly IQuestionsService _questionsService;
         private readonly IUsersService _usersService;
         
-        public UsersController(IUsersService usersService)
+        public QuestionsController(IUsersService usersService, IQuestionsService questionsService)
         {
             _usersService = usersService;
+            _questionsService = questionsService;
         }
 
         [HttpPost]
-        public IActionResult Create(CreateUserRequest request)
+        public IActionResult Create(CreateQuestionRequest request)
         {
             StringValues userId;
             if(!Request.Headers.TryGetValue("UserId", out userId))
@@ -37,32 +40,14 @@ namespace WebAPI.Controllers.Users
                 return Unauthorized();
             }
 
-            var response = _usersService.Create(
-                request.Name,
-                request.Profile,
-                request.Email,
-                request.Password
-            );
+            var response = _questionsService.Create(request.ExamId, request.Name);
 
             if (!response.IsValid)
             {
                 return BadRequest(response.Errors);
             }
             
-            return NoContent();
-        }
-
-        [HttpGet("{id}")]
-        public IActionResult GetById(Guid id)
-        {
-            var user = _usersService.GetById(id);
-            
-            if (user == null)
-            {
-                return NotFound();
-            }
-            
-            return Ok(user);
+            return Ok(response.Id);
         }
     }
 }

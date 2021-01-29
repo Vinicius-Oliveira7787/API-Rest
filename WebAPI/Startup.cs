@@ -8,8 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Domain.Authentication;
 using Microsoft.EntityFrameworkCore;
-using Domain.Exams;
-using Domain.AswerExams;
+using Domain.AnswerSheets;
 
 namespace WebAPI
 {
@@ -44,12 +43,9 @@ namespace WebAPI
             services.AddScoped(typeof (IRepository<>), typeof (Repository<>));
             services.AddScoped<IUsersRepository, UsersRepository>();
             services.AddScoped<IUsersService, UsersService>();
-            services.AddScoped<IExamsRepository, ExamsRepository>();
+            services.AddScoped<IAnswerSheetsRepository, AnswerSheetsRepository>();
+            services.AddScoped<IAnswerSheetsService, AnswerSheetsService>();
             services.AddScoped<IAuthService, AuthService>();
-            services.AddScoped<IExamsService, ExamsService>();
-            services.AddScoped<IExamsRepository, ExamsRepository>();
-            services.AddScoped<IAswerExamsRepository, AswerExamsRepository>();
-            services.AddScoped<IAswerExamsService, AswerExamsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
