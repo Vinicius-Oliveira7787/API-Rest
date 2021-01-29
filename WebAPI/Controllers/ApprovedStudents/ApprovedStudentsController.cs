@@ -10,15 +10,12 @@ namespace WebAPI.Controllers.Users
     [Route("[controller]")]
     public class ApprovedStudentsController : ControllerBase
     {
-        private readonly IUsersService _usersService;
         public readonly IRepository<User> _usersRepository;
         
         public ApprovedStudentsController(
-            IUsersService usersService,
             IRepository<User> usersRepository
         )
         {
-            _usersService = usersService;
             _usersRepository = usersRepository;
         }
 

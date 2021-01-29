@@ -7,7 +7,7 @@ namespace Domain.AswerExams
 {
     public class AswerExamsService : IAswerExamsService {
         private AswerExam _exam { get; set; }
-        private double? _score { get;  set; } = 0;
+        public double Score { get; private set; } = 0;
         public readonly IAswerExamsRepository _AswerExamsRepository;
 
         public AswerExamsService(IAswerExamsRepository aswerExamsRepository)
@@ -23,8 +23,8 @@ namespace Domain.AswerExams
                 return new CreatedAswerExamsDTO(validation.message);
             }
 
-                _score = CorrectExam(exam);
-                if (_score == null) {
+                var examCorrection = CorrectExam(exam);
+                if (examCorrection == null) {
                     return new CreatedAswerExamsDTO(validation.message);
                 }
 
@@ -45,21 +45,17 @@ namespace Domain.AswerExams
             double score = (correctAswersCounter / exam.Questions.Count) * 10;
             
             if (score > -1 && score < 11) {
+                Score = score;
                 return score;
             }
 
             return null;
         }
 
-        private double? GetScore() {
-            return _score;
-        }
-
-        public (AswerExam aswerExam, double? score) GetById(Guid id) {
+        public (AswerExam aswerExam, double score) GetById(Guid id) {
             var aswerExam = _AswerExamsRepository.Get(id);
-            var getScore = GetScore();
             
-            return (aswerExam, getScore);
+            return (aswerExam, Score);
         }
     }
 }

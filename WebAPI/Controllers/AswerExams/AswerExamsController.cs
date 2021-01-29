@@ -36,7 +36,7 @@ namespace WebAPI.Controllers.Exams
             var user = _usersService.GetById(Guid.Parse(userId));
 
             if (user == null) {
-                return Unauthorized();
+                return NotFound();
             }
 
             if (user.Profile == Profile.Teacher) {
@@ -56,8 +56,10 @@ namespace WebAPI.Controllers.Exams
             {
                 return BadRequest(response.Errors);
             }
-            
-            // auto enviar neste Ok() a nota do aluno
+
+            // ToDo? auto enviar neste Ok() a nota do aluno
+            var examScore = _aswerExamsService.GetById(response.Id).score;
+            user.CalculateBulletinNote(examScore);
             return Ok();
         }
 
@@ -65,7 +67,7 @@ namespace WebAPI.Controllers.Exams
         public IActionResult GetScore(Guid id) {
             var aswerExams = _aswerExamsService.GetById(id);
 
-            if (aswerExams.aswerExam == null || aswerExams.score == null)
+            if (aswerExams.aswerExam == null)
             {
                 return NotFound();
             }

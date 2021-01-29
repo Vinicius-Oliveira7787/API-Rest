@@ -6,6 +6,6 @@ namespace Domain.AswerExams
 {
     public interface IAswerExamsService  {
         CreatedAswerExamsDTO Create(List<string> questionsAswers, Exam exam);
-        (AswerExam aswerExam, double? score) GetById(Guid id);
+        (AswerExam aswerExam, double score) GetById(Guid id);
     }
 }
