@@ -2,23 +2,17 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using Domain.Common;
+using Domain.Questions;
 
 namespace Domain.ValidateExams {
     public class ValidateExam : Entity {
-        public List<string> Questions { get; private set; }
-
-        public ValidateExam(List<string> questions)
-        {
-            Questions = questions;
-        }
-
-        protected (IList<string> message, bool isValid) ValidateTest() {
+        protected (IList<string> message, bool isValid) ValidateTest(IList<Question> questions) {
             var message = new List<string>();
-            foreach (var item in Questions)
+            foreach (var item in questions)
             {
                 var regexLetters = Regex
-                    .IsMatch(item.Normalize(NormalizationForm.FormD), @"^([a-zA-Z]\p{M}*)+$");
-                var regexNumbers = Regex.IsMatch(item, @"^\d+$");
+                    .IsMatch(item.Exercise.Normalize(NormalizationForm.FormD), @"^([a-zA-Z]\p{M}*)+$");
+                var regexNumbers = Regex.IsMatch(item.Exercise, @"^\d+$");
 
                 if (!regexLetters && !regexNumbers)
                 {

@@ -1,18 +1,27 @@
 using System.Collections.Generic;
-using System.Text;
-using System.Text.RegularExpressions;
+using System.Linq;
 using Domain.Common;
+using Domain.Questions;
 using Domain.ValidateExams;
 
 namespace Domain.Exams
 {
-    public class Exam : ValidateExam
-    {
+    public class Exam : ValidateExam {
+        public virtual IList<Question> Questions { get; set; }
+        
+        public Exam(IList<string> questions) {
+            if (questions != null) {
+                Questions = questions
+                    .Select(question => new Question(Id, question))
+                    .ToList();
+            }
+        }
 
-        public Exam(List<string> questions) : base(questions) {}
+        protected Exam() {}
+        public Exam(List<string> questions){}
 
             public (IList<string> message, bool isValid) Validate() {
-            var validation = ValidateTest();
+            var validation = ValidateTest(Questions);
             
             if (!validation.isValid) {
                 return (validation.message, validation.isValid);
