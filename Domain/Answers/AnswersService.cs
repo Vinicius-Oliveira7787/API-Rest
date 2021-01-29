@@ -16,9 +16,9 @@ namespace Domain.Answers
             _answersRepository = answersRepository;
         }
 
-        public CreatedAnswerDTO Create(string name, IList<string> questions)
+        public CreatedAnswerDTO Create(Guid answerSheetId, IList<string> questions)
         {
-            var _answer = new Answer(name, questions);
+            var _answer = new Answer(answerSheetId, questions);
             var AnswerValidation = _answer.Validate();
 
             if (AnswerValidation.isValid)

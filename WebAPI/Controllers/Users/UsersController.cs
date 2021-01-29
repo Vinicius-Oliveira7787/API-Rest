@@ -29,7 +29,7 @@ namespace WebAPI.Controllers.Users
 
             if (user == null)
             {
-                return Unauthorized();
+                // return Unauthorized();
             }
 
             if (user.Profile == Profile.Student)
@@ -49,20 +49,20 @@ namespace WebAPI.Controllers.Users
                 return BadRequest(response.Errors);
             }
             
-            return NoContent();
+            return Ok(response.Id);
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(Guid id)
+        public IActionResult GetById(string id)
         {
-            var user = _usersService.GetById(id);
+            // var user = _usersService.GetById(id);
             
-            if (user == null)
-            {
-                return NotFound();
-            }
+            // if (user == null)
+            // {
+            //     return NotFound();
+            // }
             
-            return Ok(user);
+            return Ok("user");
         }
     }
 }

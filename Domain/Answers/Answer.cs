@@ -9,12 +9,14 @@ namespace Domain.Answers
     public class Answer : Entity
     {
         public double Score { get; set; }
+        public Guid AswerSheetId { get; private set; }
         public virtual IList<Question> Answers { get; set; }
 
-        public Answer(string name, IList<string> answer)
+        public Answer(Guid answerSheetId, IList<string> answer)
         {
             if (Answers != null)
             {
+                AswerSheetId = answerSheetId;
                 Answers = answer
                     .Select(aswer => new Question(Id, aswer))
                     .ToList();

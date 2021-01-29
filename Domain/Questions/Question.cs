@@ -11,7 +11,6 @@ namespace Domain.Questions
     public class Question : Entity
     {
         public virtual AnswerSheet AnswerSheet { get; private set; }
-        public virtual Answer Answer { get; private set; }
         public Guid AswerSheetId { get; private set; }
         public string Aswer { get; private set; }
 
