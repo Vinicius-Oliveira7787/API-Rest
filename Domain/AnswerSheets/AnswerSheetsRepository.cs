@@ -12,9 +12,10 @@ namespace Domain.AnswerSheets
         {
             _repository = repository;
         }
-        public void Add(AnswerSheet team)
+        
+        public void Add(AnswerSheet answerSheet)
         {
-            _repository.Add(team);
+            _repository.Add(answerSheet);
         }
 
         public AnswerSheet Get(Func<AnswerSheet, bool> predicate)

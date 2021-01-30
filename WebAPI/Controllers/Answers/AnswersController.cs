@@ -5,6 +5,7 @@ using System;
 using Domain.Answers;
 using System.Linq;
 using Domain.AnswerSheets;
+using System.Collections.Generic;
 
 namespace WebAPI.Controllers.Answers
 {
@@ -79,15 +80,16 @@ namespace WebAPI.Controllers.Answers
             //     return Unauthorized();
             // }
 
-            var response = _answerSheetsRepository.Get(request.AnswerSheetId);
-            var score = _answersService.CorrectExam(response);
+            // var response = _answerSheetsRepository.Get(AnswerSheet => AnswerSheet.Id == request.AnswerSheetId);
+            // var response = _answerSheetsRepository.Get(request.AnswerSheetId);
+            var score = _answersService.CorrectExam(new List<string>{"1","1","1"});
 
             // if (!response.IsValid)
             // {
             //     return BadRequest(response.Errors);
             // }
             
-            return Ok(response.Id);
+            return Ok("response.Questions");
         }
     }
 }

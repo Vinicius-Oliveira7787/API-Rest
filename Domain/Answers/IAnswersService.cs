@@ -7,7 +7,7 @@ namespace Domain.Answers
     public interface IAnswersService
     {
         CreatedAnswerDTO Create(Guid id, List<string> aswers);
-        double? CorrectExam(AnswerSheet exam);
+        double? CorrectExam(IList<string> exam);
         (Answer aswerExam, double score) GetById(Guid id);
     }
 }

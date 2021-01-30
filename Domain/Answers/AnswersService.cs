@@ -30,18 +30,18 @@ namespace Domain.Answers
             return new CreatedAnswerDTO(AnswerValidation.errors);
         }
 
-        public double? CorrectExam(AnswerSheet exam) {
+        public double? CorrectExam(IList<string> exam) {
             int correctAswersCounter = 0;
             
-            for (int i = 0; i < exam.Questions.Count; i++) {
+            for (int i = 0; i < exam.Count; i++) {
                 //   TeacherTemplate  /    StudentAswers
-                if (exam.Questions[i] == _answer.Answers[i]) {
+                if (exam[i] == _answer.Answers[i]) {
                     correctAswersCounter++;
                 }
             }
             
             // Calculating the score
-            double score = (correctAswersCounter / exam.Questions.Count) * 10;
+            double score = (correctAswersCounter / exam.Count) * 10;
             
             if (score > -1 && score < 11) {
                 _score = score;
