@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using Domain.Common;
 using Domain.Questions;
+using WF_Lista_DataTable;
 
 namespace Domain.Answers
 {
     public class Answer : Entity
-    {
+    {        
         public double Score { get; set; }
         public virtual IList<Question> Answers { get; set; }
         public Guid AnswerSheetId { get; set; }
+        public DataTable answers { get; set; }
 
         public Answer(Guid answerSheetId, IList<string> answer)
         {
@@ -49,6 +52,9 @@ namespace Domain.Answers
         public (IList<string> errors, bool isValid) Validate()
         {
             var errors = new List<string>();
+            var abc = new CollectionHelper();
+            answers = abc.ConvertTo(Answers);
+
             
             // var validateAanswer = ValidateAanswer();
             // if (!validateAanswer.isValid)

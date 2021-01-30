@@ -12,9 +12,9 @@ namespace Domain.AnswerSheets
             _answerSheetsRepository = answerSheetsRepository;
         }
 
-        public CreatedAnswerSheetDTO Create(string name, IList<string> questions)
+        public CreatedAnswerSheetDTO Create(string[] questions)
         {
-            var answerSheet = new AnswerSheet(name, questions);
+            var answerSheet = new AnswerSheet(questions);
             var AnswerSheetValidation = answerSheet.Validate();
 
             if (AnswerSheetValidation.isValid)

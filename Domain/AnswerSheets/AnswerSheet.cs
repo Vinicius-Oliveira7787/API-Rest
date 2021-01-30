@@ -8,29 +8,16 @@ namespace Domain.AnswerSheets
 {
     public class AnswerSheet : Entity
     {
-        public string Title { get; set; }
         public virtual IList<Question> Questions { get; set; }
 
-        public AnswerSheet(string name, IList<string> questions)
+        public AnswerSheet(string[] answers)
         {
-            Title = name;
-            if (questions != null)
+            if (answers != null)
             {
-                Questions = questions
+                Questions = answers
                     .Select(aswer => new Question(Id, aswer))
                     .ToList();
             }
-        }
-
-
-        protected bool ValidateName()
-        {
-            if (string.IsNullOrEmpty(Title))
-            {
-                return false;
-            }
-
-            return true;
         }
 
         public (string message, bool isValid) ValidateAanswer()
@@ -69,10 +56,6 @@ namespace Domain.AnswerSheets
         public (IList<string> errors, bool isValid) Validate()
         {
             var errors = new List<string>();
-            if (!ValidateName())
-            {
-                errors.Add("Title not found");
-            }
             
             var validateAanswer = ValidateAanswer();
             if (!validateAanswer.isValid)

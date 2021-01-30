@@ -40,7 +40,7 @@ namespace WebAPI.Controllers.AnswerSheets
             //     return Unauthorized();
             // }
 
-            var response = _answerSheetsService.Create(request.Name, request.Questions);
+            var response = _answerSheetsService.Create(request.Questions);
 
             if (!response.IsValid)
             {

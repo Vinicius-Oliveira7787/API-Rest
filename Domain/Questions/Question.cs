@@ -12,6 +12,7 @@ namespace Domain.Questions
     {
         public string Aswer { get; private set; }
         public Guid AnswerSheetId { get; set; }
+        public virtual AnswerSheet AnswerSheet { get; set; }
 
         public Question(Guid answerSheetId ,string aswer)
         {
