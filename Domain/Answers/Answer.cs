@@ -10,15 +10,15 @@ namespace Domain.Answers
     public class Answer : Entity
     {        
         public double Score { get; set; }
-        public IList<string> Answers { get; set; }
+        public string[] Answers { get; set; }
         public Guid AnswerSheetId { get; set; }
 
-        public Answer(Guid answerSheetId, IList<string> answer)
+        public Answer(Guid answerSheetId, string[] answer)
         {
             AnswerSheetId = answerSheetId;
             if (Answers != null)
             {
-                Answers = answer.ToList();
+                Answers = answer;
             }
         }
 
@@ -48,7 +48,6 @@ namespace Domain.Answers
         public (IList<string> errors, bool isValid) Validate()
         {
             var errors = new List<string>();
-            var abc = new CollectionHelper();
             
             // var validateAanswer = ValidateAanswer();
             // if (!validateAanswer.isValid)

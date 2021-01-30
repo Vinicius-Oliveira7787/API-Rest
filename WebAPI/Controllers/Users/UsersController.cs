@@ -22,23 +22,24 @@ namespace WebAPI.Controllers.Users
         [HttpPost]
         public IActionResult Create(CreateUserRequest request)
         {
-            // StringValues userId;
-            // if(!Request.Headers.TryGetValue("UserId", out userId))
-            // {
-            //     return Unauthorized();
-            // }
+            StringValues userId;
+            if(!Request.Headers.TryGetValue("UserId", out userId))
+            {
+                return Unauthorized();
+            }
 
-            // var user = _usersService.GetById(Guid.Parse(userId));
+            var user = _usersService.GetById(Guid.Parse(userId));
 
-            // if (user == null)
-            // {
-            //     // return Unauthorized();
-            // }
+            if (user == null)
+            {
+                return Unauthorized();
+            }
 
-            // if (user.Profile == Profile.Student)
-            // {
-            //     return Unauthorized();
-            // }
+            if (user.Profile == Profile.Student)
+            {
+                return Unauthorized();
+            }
+
             var allUsers = _usersRepository.GetAll();
             var studentsCounter = allUsers.Select(user => user.Profile == Profile.Student).Count();
             if (studentsCounter > 99)
@@ -62,14 +63,14 @@ namespace WebAPI.Controllers.Users
         }
 
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public IActionResult Get(Guid id)
         {
-            // var user = _usersService.GetById(id);
+            var user = _usersService.GetById(id);
             
-            // if (user == null)
-            // {
-            //     return NotFound();
-            // }
+            if (user == null)
+            {
+                return NotFound();
+            }
             
             return Ok(id);
         }
@@ -77,14 +78,7 @@ namespace WebAPI.Controllers.Users
         [HttpGet]
         public IActionResult Get()
         {
-            // var user = _usersService.GetById(id);
-            
-            // if (user == null)
-            // {
-            //     return NotFound();
-            // }
             var users = _usersRepository.GetAll();
-            
             return Ok(users);
         }
     }

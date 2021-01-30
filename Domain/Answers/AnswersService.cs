@@ -16,7 +16,7 @@ namespace Domain.Answers
             _answersRepository = answersRepository;
         }
 
-        public CreatedAnswerDTO Create(Guid answerSheetId, List<string> questions)
+        public CreatedAnswerDTO Create(Guid answerSheetId, string[] questions)
         {
             var _answer = new Answer(answerSheetId, questions);
             var AnswerValidation = _answer.Validate();
@@ -30,10 +30,10 @@ namespace Domain.Answers
             return new CreatedAnswerDTO(AnswerValidation.errors);
         }
 
-        public double? CorrectExam(IList<string> exam) {
+        public double? CorrectExam(string[] exam) {
             int correctAswersCounter = 0;
             
-            for (int i = 0; i < exam.Count; i++) {
+            for (int i = 0; i < exam.Length; i++) {
                 //   TeacherTemplate  /    StudentAswers
                 if (exam[i] == _answer.Answers[i]) {
                     correctAswersCounter++;
@@ -41,7 +41,7 @@ namespace Domain.Answers
             }
             
             // Calculating the score
-            double score = (correctAswersCounter / exam.Count) * 10;
+            double score = (correctAswersCounter / exam.Length) * 10;
             
             if (score > -1 && score < 11) {
                 _score = score;

@@ -28,23 +28,23 @@ namespace WebAPI.Controllers.AnswerSheets
         [HttpPost]
         public IActionResult Create(CreateAnswerSheetRequest request)
         {
-            // StringValues userId;
-            // if(!Request.Headers.TryGetValue("UserId", out userId))
-            // {
-            //     return Unauthorized();
-            // }
+            StringValues userId;
+            if(!Request.Headers.TryGetValue("UserId", out userId))
+            {
+                return Unauthorized();
+            }
 
-            // var user = _usersService.GetById(Guid.Parse(userId));
+            var user = _usersService.GetById(Guid.Parse(userId));
 
-            // if (user == null)
-            // {
-            //     return Unauthorized();
-            // }
+            if (user == null)
+            {
+                return Unauthorized();
+            }
 
-            // if (user.Profile == Profile.Student)
-            // {
-            //     return Unauthorized();
-            // }
+            if (user.Profile == Profile.Student)
+            {
+                return Unauthorized();
+            }
 
             var response = _answerSheetsService.Create(request.Questions);
 

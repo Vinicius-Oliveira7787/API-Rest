@@ -1,6 +1,7 @@
 using System.Reflection;
 using Domain.Answers;
 using Domain.AnswerSheets;
+using Domain.ApprovedStudents;
 using Domain.Users;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +12,7 @@ namespace Infra
         public DbSet<User> Users { get; set; }
         public DbSet<AnswerSheet> AnswerSheets { get; set; }
         public DbSet<Answer> Answers { get; set; }
+        public DbSet<ApprovedStudent> ApprovedStudents { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

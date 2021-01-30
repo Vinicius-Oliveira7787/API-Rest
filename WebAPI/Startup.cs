@@ -39,8 +39,8 @@ namespace WebAPI
 
             services.AddControllers();
 
-            services.AddSingleton(typeof (IRepository<>), typeof (RepositoryInMemory<>));
-            // services.AddScoped(typeof (IRepository<>), typeof (Repository<>));
+            // services.AddSingleton(typeof (IRepository<>), typeof (RepositoryInMemory<>));
+            services.AddScoped(typeof (IRepository<>), typeof (Repository<>));
             services.AddScoped<IUsersRepository, UsersRepository>();
             services.AddScoped<IUsersService, UsersService>();
             services.AddScoped<IAnswersRepository, AnswersRepository>();
@@ -53,10 +53,10 @@ namespace WebAPI
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseCors("any");
-            // using (var db = new APIContext())
-            // {
-            //     db.Database.Migrate();
-            // }
+            using (var db = new APIContext())
+            {
+                db.Database.Migrate();
+            }
 
             if (env.IsDevelopment())
             {

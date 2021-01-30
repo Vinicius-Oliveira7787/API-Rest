@@ -25,11 +25,19 @@ The Alf school apply multiple choices exams for the students. The student's scor
 
 ### Funcionalities
 
-Start with the first migration `dotnet ef migrations add InitialCreate`. The system automatically register an admin users (teacher), that is necessary for criation of others users and exams. After starting migration, you need to create others users, students or teachers, then create another admin(teacher), that you will use his id for everthing.
+Start with the first migration `dotnet ef migrations add <any name>`. The system automatically register an admin users (teacher), that is necessary for criation of others users and exams. After starting migration, you need to create others users, students or teachers, then create another admin(teacher), that you will use his id for everthing.
 
-For register the answer sheet of the exam is necessary the id of a teacher, after registering you can answer the exam with users(student) using the exam id that the api delivers for you after registering the exam.
+For register the answer sheet of the exam is necessary the id of a teacher and a list of questions.
+
+After registering you can answer the exam with users(student), list of questions and using the answer sheet id that the api delivers for you after registering the answer sheet.
 
 After answered the exam, the program inform you with the score.
+
+To get approved students just need to send a Get request
+
+### Considerações
+
+A parta de Web Api não está funcionando pois não possuo domínio sobre banco de dados e Web Api oque causou erros que não consegui resolver porémo código está bom 
 
 ### CheckList
 
@@ -44,10 +52,10 @@ After answered the exam, the program inform you with the score.
 * Os alunos aprovados tem média de notas maior do que 7. ToDO
 * A entrada e saída de dados deverá ser em JSON. Check
 
-* Entrega dos requisitos obrigatórios: 6 pontos.
+* Entrega dos requisitos obrigatórios: 6 pontos. Failed
 * Documentação: 1 ponto. Check
 * Testes unitários: 1 ponto. Check
 * Separação de camadas: 1 ponto. Check
 * API RESTFul: 1 ponto. Check
 
-##### ReadMe Made By: Matheus Tallmann
+##### Special thanks to: Matheus Tallmann that helped with readme.

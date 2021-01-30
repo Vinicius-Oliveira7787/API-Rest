@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Domain.AnswerSheets
 {
@@ -28,6 +29,17 @@ namespace Domain.AnswerSheets
 
         public AnswerSheet GetById(Guid id) {
             return _answerSheetsRepository.Get(id);
+        }
+
+        public string[] GetQuestions(Guid id)
+        {
+            var answerSheet =_answerSheetsRepository.Get(id);
+            if (answerSheet == null)
+            {
+                return null;
+            }
+            
+            return answerSheet.Questions.ToArray();
         }
     }
 }
