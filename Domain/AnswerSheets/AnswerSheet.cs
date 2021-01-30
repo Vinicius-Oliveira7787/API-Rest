@@ -17,12 +17,11 @@ namespace Domain.AnswerSheets
             if (questions != null)
             {
                 Questions = questions
-                    .Select(aswer => new Question(Id, aswer))
+                    .Select(aswer => new Question(aswer))
                     .ToList();
             }
         }
 
-        protected AnswerSheet() {}
 
         protected bool ValidateName()
         {
@@ -34,7 +33,7 @@ namespace Domain.AnswerSheets
             return true;
         }
 
-        private (string message, bool isValid) ValidateAanswer()
+        public (string message, bool isValid) ValidateAanswer()
         {
             if (Questions == null)
             {

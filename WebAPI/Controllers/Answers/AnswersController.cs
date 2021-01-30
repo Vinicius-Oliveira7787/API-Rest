@@ -1,26 +1,27 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Domain.Users;
-using Domain.Questions;
 using Microsoft.Extensions.Primitives;
+using Domain.Users;
 using System;
+using Domain.Answers;
+using System.Linq;
 
-namespace WebAPI.Controllers.Questions
+namespace WebAPI.Controllers.Answers
 {
     [ApiController]
     [Route("[controller]")]
-    public class QuestionsController : ControllerBase
+    public class AnswersController : ControllerBase
     {
-        private readonly IQuestionsService _questionsService;
+        private readonly IAnswersService _answersService;
         private readonly IUsersService _usersService;
         
-        public QuestionsController(IUsersService usersService, IQuestionsService questionsService)
+        public AnswersController(IUsersService usersService, IAnswersService answersService)
         {
             _usersService = usersService;
-            _questionsService = questionsService;
+            _answersService = answersService;
         }
 
         [HttpPost]
-        public IActionResult Create(CreateQuestionRequest request)
+        public IActionResult Create(CreateAnswersRequest request)
         {
             // StringValues userId;
             // if(!Request.Headers.TryGetValue("UserId", out userId))
@@ -40,14 +41,14 @@ namespace WebAPI.Controllers.Questions
             //     return Unauthorized();
             // }
 
-            // var response = _questionsService.Create(request.ExamId, request.Name);
+            var response = _answersService.Create(request.Questions.ToList());
 
             // if (!response.IsValid)
             // {
             //     return BadRequest(response.Errors);
             // }
             
-            return Ok();
+            return Ok(response.Id);
         }
     }
 }

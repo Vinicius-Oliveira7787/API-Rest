@@ -9,53 +9,50 @@ namespace Domain.Answers
     public class Answer : Entity
     {
         public double Score { get; set; }
-        public Guid AswerSheetId { get; private set; }
         public virtual IList<Question> Answers { get; set; }
 
-        public Answer(Guid answerSheetId, IList<string> answer)
+        public Answer(IList<string> answer)
         {
             if (Answers != null)
             {
-                AswerSheetId = answerSheetId;
                 Answers = answer
-                    .Select(aswer => new Question(Id, aswer))
+                    .Select(aswer => new Question(aswer))
                     .ToList();
             }
         }
 
-        protected Answer() {}
 
-        private (string message, bool isValid) ValidateAanswer()
-        {
-            (string message, bool isValid) validation = ("", true);
-            for (int i = 0; i < Answers.Count; i++)
-            {
-                var temporary = Answers[i].Validate();
-                if (!temporary.isValid)
-                {
-                    validation.message = temporary.errors.ToString();
-                    validation.isValid = false;
-                    break;
-                }
-            }
+        // private (string message, bool isValid) ValidateAanswer()
+        // {
+        //     (string message, bool isValid) validation = ("", true);
+        //     for (int i = 0; i < Answers.Count; i++)
+        //     {
+        //         var temporary = Answers[i].Validate();
+        //         if (!temporary.isValid)
+        //         {
+        //             validation.message = temporary.errors.ToString();
+        //             validation.isValid = false;
+        //             break;
+        //         }
+        //     }
 
-            if (!validation.isValid)
-            {
-                return (validation.message, false);
-            }
+        //     if (!validation.isValid)
+        //     {
+        //         return (validation.message, false);
+        //     }
 
-            return ("OK", true);
-        }
+        //     return ("OK", true);
+        // }
 
         public (IList<string> errors, bool isValid) Validate()
         {
             var errors = new List<string>();
             
-            var validateAanswer = ValidateAanswer();
-            if (!validateAanswer.isValid)
-            {
-                errors.Add(validateAanswer.message);
-            }
+            // var validateAanswer = ValidateAanswer();
+            // if (!validateAanswer.isValid)
+            // {
+            //     errors.Add(validateAanswer.message);
+            // }
 
             return (errors, errors.Count == 0);
         }

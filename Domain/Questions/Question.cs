@@ -10,13 +10,11 @@ namespace Domain.Questions
 {
     public class Question : Entity
     {
-        public virtual AnswerSheet AnswerSheet { get; private set; }
-        public Guid AswerSheetId { get; private set; }
         public string Aswer { get; private set; }
 
-        public Question(Guid aswerSheetId, string aswer)
+        public Question(string aswer)
         {
-            AswerSheetId = aswerSheetId;
+            Aswer = aswer;
         }
 
         public (IList<string> errors, bool isValid) Validate()
@@ -34,14 +32,14 @@ namespace Domain.Questions
 
         private (string message, bool isValid) ValidateAswer()
         {
-            var regexLetters = Regex
-                .IsMatch(Aswer.Normalize(NormalizationForm.FormD), @"^([a-zA-Z]\p{M}*)+$");
-            var regexNumbers = Regex.IsMatch(Aswer, @"^\d+$");
+            // var regexLetters = Regex
+            //     .IsMatch(Aswer.Normalize(NormalizationForm.FormD), @"^([a-zA-Z]\p{M}*)+$");
+            // var regexNumbers = Regex.IsMatch(Aswer, @"^\d+$");
 
-            if (!regexLetters && !regexNumbers)
-            {
-                return ("Resposta inválida, somente números ou letras.", false);
-            }
+            // if (!regexLetters && !regexNumbers)
+            // {
+            //     return ("Resposta inválida, somente números ou letras.", false);
+            // }
             
             return ("OK", true);
         }

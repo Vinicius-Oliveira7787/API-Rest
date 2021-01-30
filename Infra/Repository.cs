@@ -7,7 +7,7 @@ namespace Infra
     {
         public void Add(T entity)
         {
-            using (var db = new BrasileiraoContext())
+            using (var db = new APIContext())
             {
                 db.Add<T>(entity);
                 db.SaveChanges();
@@ -16,7 +16,7 @@ namespace Infra
 
         public T Get(Func<T, bool> predicate)
         {
-            using (var db = new BrasileiraoContext())
+            using (var db = new APIContext())
             {
                 return db.Find<T>(predicate);
             }
@@ -24,7 +24,7 @@ namespace Infra
 
         public T Get(Guid id)
         {
-            using (var db = new BrasileiraoContext())
+            using (var db = new APIContext())
             {
                 Func<Entity, bool> findById = x => x.Id == id;
                 return db.Find<T>(findById);

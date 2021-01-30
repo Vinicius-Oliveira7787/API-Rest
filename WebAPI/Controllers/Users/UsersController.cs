@@ -53,14 +53,14 @@ namespace WebAPI.Controllers.Users
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(string id)
+        public IActionResult GetById(Guid id)
         {
-            // var user = _usersService.GetById(id);
+            var user = _usersService.GetById(id);
             
-            // if (user == null)
-            // {
-            //     return NotFound();
-            // }
+            if (user == null)
+            {
+                return NotFound();
+            }
             
             return Ok("user");
         }

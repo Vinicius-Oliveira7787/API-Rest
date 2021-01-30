@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infra
 {
-    public class BrasileiraoContext : DbContext
+    public class APIContext : DbContext
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Question> Questions { get; set; }

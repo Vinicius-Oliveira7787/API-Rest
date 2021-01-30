@@ -17,8 +17,6 @@ namespace Domain.Users
 
         public CreatedUserDTO(IList<string> errors)
         {
-            // esta atribuição não é necessária pois isValid é false por padrão
-            IsValid = false;
             Errors = errors;
         }
     }

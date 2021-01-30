@@ -31,4 +31,21 @@ For register the answer sheet of the exam is necessary the id of a teacher, afte
 
 After answered the exam, the program inform you with the score.
 
-![](https://media.discordapp.net/attachments/763179298323431484/804835619439378502/Captura_de_tela_2021-01-29_190039.png?width=850&height=476)
+### CheckList
+
+* Cadastrar gabarito da prova. Check
+* Cadastrar as respostas de cada aluno para cada prova.
+* Verificar a nota final de cada aluno.
+* Listar os alunos aprovados.
+
+* A nota total da prova é sempre maior que 0 e menor que 10. Check
+* A quantidade máxima de alunos é 100. Check
+* O peso de cada questão é sempre um inteiro maior que 0. Check
+* Os alunos aprovados tem média de notas maior do que 7.
+* A entrada e saída de dados deverá ser em JSON. Check
+
+* Entrega dos requisitos obrigatórios: 6 pontos.
+* Documentação: 1 ponto. Check
+* Testes unitários: 1 ponto. Check
+* Separação de camadas: 1 ponto. Check
+* API RESTFul: 1 ponto. Check
