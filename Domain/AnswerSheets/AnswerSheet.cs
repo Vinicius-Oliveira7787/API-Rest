@@ -17,14 +17,24 @@ namespace Domain.AnswerSheets
             }
         }
 
-        public (string message, bool isValid) ValidateAanswer()
+        private (string message, bool isValid) ValidateAanswer()
         {
             if (Questions == null)
             {
                 return ("emptyAnswerSheet", false);
             }
+            
+            var emptyAanswerValidation = false;
+            for (int i = 0; i < Questions.Count; i++)
+            {
+                var temporary = String.IsNullOrEmpty(Questions[i]);
+                if (temporary || Questions[i] == " ")
+                {
+                    emptyAanswerValidation = true;
+                    break;
+                }
+            }
 
-            var emptyAanswerValidation = Questions.Any(question => question == null);
             if (emptyAanswerValidation)
             {
                 return ("Missing Question(s)", false);
@@ -38,12 +48,14 @@ namespace Domain.AnswerSheets
             var errors = new List<string>();
             
             var validateAanswer = ValidateAanswer();
+            errors.Add(validateAanswer.message);
+            
             if (!validateAanswer.isValid)
             {
-                errors.Add(validateAanswer.message);
+                return (errors, false);    
             }
 
-            return (errors, errors.Count == 0);
+            return (errors, true);
         }
     }
 }
