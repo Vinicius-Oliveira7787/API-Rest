@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Domain.Common
 {
@@ -7,5 +8,6 @@ namespace Domain.Common
         void Add(T entity);
         T Get(Func<T, bool> predicate);
         T Get(Guid id);
+        List<T> GetAll();
     }
 }

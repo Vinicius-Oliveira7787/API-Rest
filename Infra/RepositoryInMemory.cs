@@ -24,5 +24,10 @@ namespace Infra
         {
             return _entities.FirstOrDefault(x => x.Id == id);
         }
+
+        public List<T> GetAll()
+        {
+            return _entities.Select(x => x).ToList();
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Domain.Common;
 
 namespace Domain.AnswerSheets
@@ -24,6 +25,11 @@ namespace Domain.AnswerSheets
         public AnswerSheet Get(Guid id)
         {
             return _repository.Get(id);
+        }
+
+        public List<AnswerSheet> GetAll()
+        {
+            return _repository.GetAll();
         }
     }
 }

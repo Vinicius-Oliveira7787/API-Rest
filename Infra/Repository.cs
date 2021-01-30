@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Domain.Common;
 
 namespace Infra
@@ -28,6 +30,14 @@ namespace Infra
             {
                 Func<Entity, bool> findById = x => x.Id == id;
                 return db.Find<T>(findById);
+            }
+        }
+
+        public List<T> GetAll()
+        {
+            using (var db = new APIContext())
+            {
+                return db.Set<T>().ToList();
             }
         }
     }

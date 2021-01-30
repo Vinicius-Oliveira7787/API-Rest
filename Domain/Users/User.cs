@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
 using Domain.People;
@@ -11,12 +12,33 @@ namespace Domain.Users
         public Profile Profile { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
+        public double? Score { get; private set; }
+        private List<double> _allScores { get; set; }
+
 
         public User(string name, string password, string email, Profile profile) : base(name)
         {
             Password = password;
             Email = email;
             Profile = profile;
+        }
+
+        public void SetScore(double score)
+        {
+            if (score > -1 && score < 11)
+            {
+                _allScores.Add(score);
+            }
+        }
+
+        public double GetScore()
+        {
+            double temporay = 0;
+            
+            temporay = _allScores.Sum() / _allScores.Count;
+            Score = temporay;
+
+            return temporay;
         }
 
         private bool ValidateEmail()

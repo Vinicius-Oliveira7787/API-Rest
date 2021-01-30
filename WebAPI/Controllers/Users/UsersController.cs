@@ -2,6 +2,7 @@
 using Domain.Users;
 using System;
 using Microsoft.Extensions.Primitives;
+using System.Linq;
 
 namespace WebAPI.Controllers.Users
 {
@@ -10,10 +11,12 @@ namespace WebAPI.Controllers.Users
     public class UsersController : ControllerBase
     {
         private readonly IUsersService _usersService;
+        private readonly IUsersRepository _usersRepository;
         
-        public UsersController(IUsersService usersService)
+        public UsersController(IUsersRepository usersRepository, IUsersService usersService)
         {
             _usersService = usersService;
+            _usersRepository = usersRepository;
         }
 
         [HttpPost]
@@ -36,6 +39,12 @@ namespace WebAPI.Controllers.Users
             // {
             //     return Unauthorized();
             // }
+            var allUsers = _usersRepository.GetAll();
+            var studentsCounter = allUsers.Select(user => user.Profile == Profile.Student).Count();
+            if (studentsCounter > 99)
+            {
+                return Unauthorized("limite excedido");
+            }
 
             var response = _usersService.Create(
                 request.Name,

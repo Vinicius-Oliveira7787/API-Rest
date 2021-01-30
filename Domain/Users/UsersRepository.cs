@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Domain.Common;
 
 namespace Domain.Users
@@ -25,6 +26,11 @@ namespace Domain.Users
         public User Get(Guid id)
         {
             return _repository.Get(id);
+        }
+
+        public List<User> GetAll()
+        {
+            return _repository.GetAll();
         }
     }
 }

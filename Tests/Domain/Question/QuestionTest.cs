@@ -11,7 +11,7 @@ namespace Tests.Domain.Questions
         [InlineData(new string[1]{"OK"}, true)]
         public void Should_return_true_when_(string[] errors, bool isValid)
         {
-            var question = new Question("sadas");
+            var question = new Question(Guid.NewGuid(), "sadas");
 
             var questionIsValid = question.Validate().isValid;
 

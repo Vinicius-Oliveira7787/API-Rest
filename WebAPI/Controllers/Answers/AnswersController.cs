@@ -41,7 +41,7 @@ namespace WebAPI.Controllers.Answers
             //     return Unauthorized();
             // }
 
-            var response = _answersService.Create(request.Questions.ToList());
+            var response = _answersService.Create(request.AnswerSheetId, request.Questions);
 
             // if (!response.IsValid)
             // {

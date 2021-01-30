@@ -56,7 +56,7 @@ namespace WebAPI
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             // app.UseCors("any");
-            // using (var db = new BrasileiraoContext())
+            // using (var db = new APIContext())
             // {
             //     db.Database.Migrate();
             // }

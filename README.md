@@ -34,14 +34,14 @@ After answered the exam, the program inform you with the score.
 ### CheckList
 
 * Cadastrar gabarito da prova. Check
-* Cadastrar as respostas de cada aluno para cada prova.
+* Cadastrar as respostas de cada aluno para cada prova. Check
 * Verificar a nota final de cada aluno.
 * Listar os alunos aprovados.
 
 * A nota total da prova é sempre maior que 0 e menor que 10. Check
 * A quantidade máxima de alunos é 100. Check
 * O peso de cada questão é sempre um inteiro maior que 0. Check
-* Os alunos aprovados tem média de notas maior do que 7.
+* Os alunos aprovados tem média de notas maior do que 7. ToDO
 * A entrada e saída de dados deverá ser em JSON. Check
 
 * Entrega dos requisitos obrigatórios: 6 pontos.
@@ -49,3 +49,5 @@ After answered the exam, the program inform you with the score.
 * Testes unitários: 1 ponto. Check
 * Separação de camadas: 1 ponto. Check
 * API RESTFul: 1 ponto. Check
+
+##### ReadMe Made By: Matheus Tallmann

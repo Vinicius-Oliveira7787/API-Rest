@@ -10,9 +10,11 @@ namespace Domain.Answers
     {
         public double Score { get; set; }
         public virtual IList<Question> Answers { get; set; }
+        public Guid AnswerSheetId { get; set; }
 
-        public Answer(IList<string> answer)
+        public Answer(Guid answerSheetId, IList<string> answer)
         {
+            AnswerSheetId = answerSheetId;
             if (Answers != null)
             {
                 Answers = answer

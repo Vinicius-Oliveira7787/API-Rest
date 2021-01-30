@@ -5,6 +5,6 @@ namespace Domain.Answers
 {
     public interface IAnswersService
     {
-        CreatedAnswerDTO Create(List<string> aswers);
+        CreatedAnswerDTO Create(Guid id, List<string> aswers);
     }
 }

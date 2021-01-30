@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Domain.Common;
 
 namespace Domain.Answers
@@ -24,6 +25,11 @@ namespace Domain.Answers
         public Answer Get(Guid id)
         {
             return _repository.Get(id);
+        }
+
+        public List<Answer> GetAll()
+        {
+            return _repository.GetAll();
         }
     }
 }
