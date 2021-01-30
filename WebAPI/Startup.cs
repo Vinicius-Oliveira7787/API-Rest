@@ -10,6 +10,7 @@ using Domain.Authentication;
 using Domain.AnswerSheets;
 using Microsoft.EntityFrameworkCore;
 using Domain.Answers;
+using Domain.Questions;
 
 namespace WebAPI
 {
@@ -47,6 +48,8 @@ namespace WebAPI
             services.AddScoped<IAnswersService, AnswersService>();
             services.AddScoped<IAnswerSheetsRepository, AnswerSheetsRepository>();
             services.AddScoped<IAnswerSheetsService, AnswerSheetsService>();
+            services.AddScoped<IQuestionsRepository, QuestionsRepository>();
+            services.AddScoped<IQuestionsService, QuestionsService>();
             services.AddScoped<IAuthService, AuthService>();
         }
 

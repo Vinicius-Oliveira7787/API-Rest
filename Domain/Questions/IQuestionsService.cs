@@ -1,8 +1,10 @@
 ﻿
+using System;
+
 namespace Domain.Questions
 {
     public interface IQuestionsService
     {
-        CreatedQuestionDTO Create(string name);
+        CreatedQuestionDTO Create(Guid id ,string name);
     }
 }

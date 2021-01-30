@@ -11,21 +11,23 @@ namespace Domain.Questions
     public class Question : Entity
     {
         public string Aswer { get; private set; }
+        public Guid AnswerSheetId { get; set; }
 
-        public Question(string aswer)
+        public Question(Guid answerSheetId ,string aswer)
         {
+            AnswerSheetId = answerSheetId;
             Aswer = aswer;
         }
 
         public (IList<string> errors, bool isValid) Validate()
         {
             var errors = new List<string>();
-            var validation = ValidateAswer();
+            // var validation = ValidateAswer();
             
-            if (!validation.isValid)
-            {
-                errors.Add($"{validation.message}");
-            }
+            // if (!validation.isValid)
+            // {
+            //     errors.Add($"{validation.message}");
+            // }
 
             return (errors, errors.Count == 0);
         }

@@ -17,7 +17,7 @@ namespace Domain.AnswerSheets
             if (questions != null)
             {
                 Questions = questions
-                    .Select(aswer => new Question(aswer))
+                    .Select(aswer => new Question(Id, aswer))
                     .ToList();
             }
         }

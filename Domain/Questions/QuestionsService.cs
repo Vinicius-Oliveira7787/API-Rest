@@ -10,9 +10,9 @@ namespace Domain.Questions
         {
             _questionsRepository = repository;
         }
-        public CreatedQuestionDTO Create(string name)
+        public CreatedQuestionDTO Create(Guid answerSheetId, string name)
         {
-            var question = new Question(name);
+            var question = new Question(answerSheetId, name);
             var questionValidation = question.Validate();
 
             if (questionValidation.isValid)

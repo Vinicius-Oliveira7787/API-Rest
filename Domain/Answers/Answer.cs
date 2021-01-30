@@ -16,7 +16,7 @@ namespace Domain.Answers
             if (Answers != null)
             {
                 Answers = answer
-                    .Select(aswer => new Question(aswer))
+                    .Select(aswer => new Question(Id, aswer))
                     .ToList();
             }
         }
