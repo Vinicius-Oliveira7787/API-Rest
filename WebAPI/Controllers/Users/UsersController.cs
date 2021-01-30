@@ -83,8 +83,9 @@ namespace WebAPI.Controllers.Users
             // {
             //     return NotFound();
             // }
+            var users = _usersRepository.GetAll();
             
-            return Ok("olá");
+            return Ok(users);
         }
     }
 }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using Domain.Common;
-using Domain.Questions;
 using WF_Lista_DataTable;
 
 namespace Domain.Answers
@@ -11,18 +10,15 @@ namespace Domain.Answers
     public class Answer : Entity
     {        
         public double Score { get; set; }
-        public virtual IList<Question> Answers { get; set; }
+        public IList<string> Answers { get; set; }
         public Guid AnswerSheetId { get; set; }
-        public DataTable answers { get; set; }
 
         public Answer(Guid answerSheetId, IList<string> answer)
         {
             AnswerSheetId = answerSheetId;
             if (Answers != null)
             {
-                Answers = answer
-                    .Select(aswer => new Question(Id, aswer))
-                    .ToList();
+                Answers = answer.ToList();
             }
         }
 
@@ -53,8 +49,6 @@ namespace Domain.Answers
         {
             var errors = new List<string>();
             var abc = new CollectionHelper();
-            answers = abc.ConvertTo(Answers);
-
             
             // var validateAanswer = ValidateAanswer();
             // if (!validateAanswer.isValid)
