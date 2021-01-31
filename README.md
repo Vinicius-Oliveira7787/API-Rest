@@ -37,7 +37,7 @@ To get approved students just need to send a Get request
 
 ### Considerações
 
-A parta de Web Api não está funcionando pois não possuo domínio sobre banco de dados e Web Api oque causou erros que não consegui resolver porémo código está bom 
+A parte de Web Api não está funcionando pois não possuo domínio sobre banco de dados e Web Api, oque resultou erros que não consegui resolver porém o código está bom
 
 ### CheckList
 
@@ -58,4 +58,4 @@ A parta de Web Api não está funcionando pois não possuo domínio sobre banco 
 * Separação de camadas: 1 ponto. Check
 * API RESTFul: 1 ponto. Check
 
-##### Special thanks to: Matheus Tallmann that helped with readme.
+##### Special thanks to: MATHEUS TALLMANN that helped with readme.
