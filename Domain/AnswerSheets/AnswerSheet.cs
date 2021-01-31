@@ -9,19 +9,16 @@ namespace Domain.AnswerSheets
     {
         public IList<string> Questions { get; set; }
 
-        public AnswerSheet(string[] answers)
+        public AnswerSheet(List<string> answers)
         {
-            if (answers != null)
-            {
-                Questions = answers.ToList();
-            }
+            Questions = answers;
         }
 
         private (string message, bool isValid) ValidateAanswer()
         {
-            if (Questions == null)
+            if (Questions == null || Questions.Count == 0)
             {
-                return ("emptyAnswerSheet", false);
+                return ("empty AnswerSheet", false);
             }
             
             var emptyAanswerValidation = false;

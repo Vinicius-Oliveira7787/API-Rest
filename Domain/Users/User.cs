@@ -13,8 +13,7 @@ namespace Domain.Users
         public string Password { get; set; }
         public string Email { get; set; }
         public double? Score { get; private set; }
-        private List<double> _allScores { get; set; }
-
+        private List<double> _allScores { get; set; } = new List<double>();
 
         public User(string name, string password, string email, Profile profile) : base(name)
         {
@@ -23,12 +22,15 @@ namespace Domain.Users
             Profile = profile;
         }
 
-        public void SetScore(double score)
+        public bool SetScore(double score)
         {
             if (score > -1 && score < 11)
             {
                 _allScores.Add(score);
+                return true;
             }
+
+            return false;
         }
 
         public double GetScore()

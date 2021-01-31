@@ -5,7 +5,7 @@ namespace Domain.AnswerSheets
 {
     public interface IAnswerSheetsService
     {
-        CreatedAnswerSheetDTO Create(string[] questions);
+        CreatedAnswerSheetDTO Create(List<string> questions);
         AnswerSheet GetById(Guid id);
         string[] GetQuestions(Guid id);
     }

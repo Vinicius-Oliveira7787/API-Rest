@@ -3,6 +3,7 @@ using Microsoft.Extensions.Primitives;
 using Domain.Users;
 using System;
 using Domain.AnswerSheets;
+using System.Linq;
 
 namespace WebAPI.Controllers.AnswerSheets
 {
@@ -46,7 +47,7 @@ namespace WebAPI.Controllers.AnswerSheets
                 return Unauthorized();
             }
 
-            var response = _answerSheetsService.Create(request.Questions);
+            var response = _answerSheetsService.Create(request.Questions.ToList());
 
             if (!response.IsValid)
             {

@@ -16,46 +16,49 @@ namespace Domain.Answers
         public Answer(Guid answerSheetId, string[] answer)
         {
             AnswerSheetId = answerSheetId;
-            if (Answers != null)
-            {
-                Answers = answer;
-            }
+            Answers = answer;
         }
 
 
-        // private (string message, bool isValid) ValidateAanswer()
-        // {
-        //     (string message, bool isValid) validation = ("", true);
-        //     for (int i = 0; i < Answers.Count; i++)
-        //     {
-        //         var temporary = Answers[i].Validate();
-        //         if (!temporary.isValid)
-        //         {
-        //             validation.message = temporary.errors.ToString();
-        //             validation.isValid = false;
-        //             break;
-        //         }
-        //     }
+        private (string message, bool isValid) ValidateAanswer()
+        {
+            if (Answers == null || Answers.Length == 0)
+            {
+                return ("empty AnswerSheet", false);
+            }
+            
+            var emptyAanswerValidation = false;
+            for (int i = 0; i < Answers.Length; i++)
+            {
+                var temporary = String.IsNullOrEmpty(Answers[i]);
+                if (temporary || Answers[i] == " ")
+                {
+                    emptyAanswerValidation = true;
+                    break;
+                }
+            }
 
-        //     if (!validation.isValid)
-        //     {
-        //         return (validation.message, false);
-        //     }
+            if (emptyAanswerValidation)
+            {
+                return ("Missing Question(s)", false);
+            }
 
-        //     return ("OK", true);
-        // }
+            return ("OK", true);
+        }
 
         public (IList<string> errors, bool isValid) Validate()
         {
             var errors = new List<string>();
             
-            // var validateAanswer = ValidateAanswer();
-            // if (!validateAanswer.isValid)
-            // {
-            //     errors.Add(validateAanswer.message);
-            // }
+            var validateAanswer = ValidateAanswer();
+            errors.Add(validateAanswer.message);
+            
+            if (!validateAanswer.isValid)
+            {
+                return (errors, false);    
+            }
 
-            return (errors, errors.Count == 0);
+            return (errors, true);
         }
     }
 }

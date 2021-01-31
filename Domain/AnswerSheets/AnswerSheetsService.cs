@@ -13,7 +13,7 @@ namespace Domain.AnswerSheets
             _answerSheetsRepository = answerSheetsRepository;
         }
 
-        public CreatedAnswerSheetDTO Create(string[] questions)
+        public CreatedAnswerSheetDTO Create(List<string> questions)
         {
             var answerSheet = new AnswerSheet(questions);
             var AnswerSheetValidation = answerSheet.Validate();
