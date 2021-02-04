@@ -27,7 +27,7 @@ namespace Domain.Answers
         {
             if (Question == null || Question.Length == 0)
             {
-                return ("empty AnswerSheet", false);
+                return ("empty Answer", false);
             }
             
             var emptyAanswerValidation = false;

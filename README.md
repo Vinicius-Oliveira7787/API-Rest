@@ -35,9 +35,6 @@ After answered the exam, the program inform you with the score.
 
 To get approved students just need to send a Get request
 
-### Considerações
-
-A parte de Web Api não está funcionando pois não possuo domínio sobre banco de dados e Web Api, oque resultou erros que não consegui resolver porém o código está bom
 
 ### CheckList
 
