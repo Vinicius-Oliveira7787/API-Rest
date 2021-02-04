@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Domain.Users
 {
@@ -12,5 +13,7 @@ namespace Domain.Users
         );
 
         User GetById(Guid id);
+        
+        List<User> GetAll();
     }
 }

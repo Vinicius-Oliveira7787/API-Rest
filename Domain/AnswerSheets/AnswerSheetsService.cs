@@ -42,5 +42,10 @@ namespace Domain.AnswerSheets
             
             return answerSheet.Questions.Select(x => x.Question).ToList();
         }
+
+        public List<AnswerSheet> GetAll() 
+        {
+            return _answerSheetsRepository.GetAll();
+        }
     }
 }

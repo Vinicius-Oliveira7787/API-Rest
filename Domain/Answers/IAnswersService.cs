@@ -8,5 +8,6 @@ namespace Domain.Answers
         CreatedAnswerDTO Create(Guid id, string aswers);
         double? CorrectExam(List<string> exam);
         (Answer aswerExam, double score) GetById(Guid id);
+        List<Answer> GetAll();
     }
 }

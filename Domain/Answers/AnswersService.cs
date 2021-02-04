@@ -29,12 +29,15 @@ namespace Domain.Answers
             return new CreatedAnswerDTO(AnswerValidation.errors);
         }
 
-        public double? CorrectExam(List<string> exam) {
+        public double? CorrectExam(List<string> exam) 
+        {
             int correctAswersCounter = 0;
             
-            for (int i = 0; i < exam.Count; i++) {
+            for (int i = 0; i < exam.Count; i++) 
+            {
                 //   TeacherTemplate  /    StudentAswers
-                if (exam[i] == _answer.Question) {
+                if (exam[i] == _answer.Question) 
+                {
                     correctAswersCounter++;
                 }
             }
@@ -42,7 +45,8 @@ namespace Domain.Answers
             // Calculating the score
             double score = (correctAswersCounter / exam.Count) * 10;
             
-            if (score > -1 && score < 11) {
+            if (score > -1 && score < 11) 
+            {
                 _score = score;
                 return score;
             }
@@ -50,10 +54,16 @@ namespace Domain.Answers
             return null;
         }
 
-        public (Answer aswerExam, double score) GetById(Guid id) {
+        public (Answer aswerExam, double score) GetById(Guid id) 
+        {
             var aswerExam = _answersRepository.Get(id);
             
             return (aswerExam, aswerExam.Score = _score);
+        }
+
+        public List<Answer> GetAll() 
+        {
+            return _answersRepository.GetAll();
         }
     }
 }

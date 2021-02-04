@@ -1,9 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using Domain.Answers;
 using Domain.AnswerSheets;
-using Domain.Users;
 using Xunit;
 
 namespace Tests.Domain.AnswersSheet

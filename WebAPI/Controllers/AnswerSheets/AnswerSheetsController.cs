@@ -12,18 +12,15 @@ namespace WebAPI.Controllers.AnswerSheets
     public class AnswerSheetsController : ControllerBase
     {
         private readonly IAnswerSheetsService _answerSheetsService;
-        private readonly IAnswerSheetsRepository _answerSheetsRepository;
         private readonly IUsersService _usersService;
         
         public AnswerSheetsController(
             IUsersService usersService, 
-            IAnswerSheetsService answerSheetsService, 
-            IAnswerSheetsRepository answerSheetsRepository
+            IAnswerSheetsService answerSheetsService
         )
         {
             _usersService = usersService;
             _answerSheetsService = answerSheetsService;
-            _answerSheetsRepository = answerSheetsRepository;
         }
 
         [HttpPost]
@@ -60,7 +57,7 @@ namespace WebAPI.Controllers.AnswerSheets
         [HttpGet]
         public IActionResult Get()
         {
-            var answerSheets = _answerSheetsRepository.GetAll();
+            var answerSheets = _answerSheetsService.GetAll();
             return Ok(answerSheets);
         }
     }

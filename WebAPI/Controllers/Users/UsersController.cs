@@ -11,12 +11,10 @@ namespace WebAPI.Controllers.Users
     public class UsersController : ControllerBase
     {
         private readonly IUsersService _usersService;
-        private readonly IUsersRepository _usersRepository;
         
-        public UsersController(IUsersRepository usersRepository, IUsersService usersService)
+        public UsersController(IUsersService usersService)
         {
             _usersService = usersService;
-            _usersRepository = usersRepository;
         }
 
         [HttpPost]
@@ -40,7 +38,7 @@ namespace WebAPI.Controllers.Users
                 return Unauthorized();
             }
 
-            var allUsers = _usersRepository.GetAll();
+            var allUsers = _usersService.GetAll();
             var studentsCounter = allUsers.Select(user => user.Profile == Profile.Student).Count();
             if (studentsCounter > 99)
             {
@@ -78,8 +76,12 @@ namespace WebAPI.Controllers.Users
         [HttpGet]
         public IActionResult Get()
         {
-            var users = _usersRepository.GetAll();
-            return Ok(users);
+            var users = _usersService.GetAll();
+            var approvedStudents = users
+                .Where(user => user.Profile == Profile.Student && user.Score >= 7)
+                .ToList();
+
+            return Ok(approvedStudents);
         }
     }
 }

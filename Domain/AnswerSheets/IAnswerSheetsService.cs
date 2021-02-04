@@ -9,5 +9,6 @@ namespace Domain.AnswerSheets
         CreatedAnswerSheetDTO Create(List<string> questions);
         AnswerSheet GetById(Guid id);
         List<string> GetQuestions(Guid id);
+        List<AnswerSheet> GetAll();
     }
 }

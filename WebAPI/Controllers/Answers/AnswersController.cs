@@ -15,23 +15,17 @@ namespace WebAPI.Controllers.Answers
     {
         private readonly IAnswersService _answersService;
         private readonly IUsersService _usersService;
-        private readonly IAnswersRepository _answersRepository;
-        private readonly IAnswerSheetsRepository _answerSheetsRepository;
         private readonly IAnswerSheetsService _answerSheetsService;
         
         public AnswersController(
             IUsersService usersService, 
             IAnswersService answersService,
-            IAnswerSheetsRepository answerSheetsRepository,
-            IAnswerSheetsService answerSheetsService,
-            IAnswersRepository answersRepository
+            IAnswerSheetsService answerSheetsService
         )
         {
             _usersService = usersService;
             _answersService = answersService;
-            _answerSheetsRepository = answerSheetsRepository;
             _answerSheetsService = answerSheetsService;
-            _answersRepository = answersRepository;
         }
 
         [HttpPost]
