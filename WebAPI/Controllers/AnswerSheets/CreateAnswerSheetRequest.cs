@@ -4,6 +4,6 @@ namespace WebAPI.Controllers.AnswerSheets
 {
     public class CreateAnswerSheetRequest
     {
-        public string[] Questions { get; set; }
+        public List<string> Questions { get; set; }
     }
 }

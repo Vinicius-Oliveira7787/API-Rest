@@ -1,18 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Domain.Answers;
 using Domain.Common;
 
 namespace Domain.AnswerSheets
 {
     public class AnswerSheet : Entity
     {
-        public IList<string> Questions { get; set; }
+        public virtual IList<Answer> Questions { get; set; }
 
-        public AnswerSheet(List<string> answers)
+        public AnswerSheet(IList<string> answers)
         {
-            Questions = answers;
+            if (answers != null)
+            {
+                Questions = answers
+                    .Select(playerName => new Answer(Id, playerName))
+                    .ToList();
+            }
         }
+
+        protected AnswerSheet() {}
 
         private (string message, bool isValid) ValidateAanswer()
         {
@@ -24,8 +32,8 @@ namespace Domain.AnswerSheets
             var emptyAanswerValidation = false;
             for (int i = 0; i < Questions.Count; i++)
             {
-                var temporary = String.IsNullOrEmpty(Questions[i]);
-                if (temporary || Questions[i] == " ")
+                var temporary = String.IsNullOrEmpty(Questions[i].Question);
+                if (temporary || Questions[i].Question == " ")
                 {
                     emptyAanswerValidation = true;
                     break;

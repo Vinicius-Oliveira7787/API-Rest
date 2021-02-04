@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Domain.Answers;
 
 namespace Domain.AnswerSheets
 {
@@ -31,7 +32,7 @@ namespace Domain.AnswerSheets
             return _answerSheetsRepository.Get(id);
         }
 
-        public string[] GetQuestions(Guid id)
+        public List<string> GetQuestions(Guid id)
         {
             var answerSheet =_answerSheetsRepository.Get(id);
             if (answerSheet == null)
@@ -39,7 +40,7 @@ namespace Domain.AnswerSheets
                 return null;
             }
             
-            return answerSheet.Questions.ToArray();
+            return answerSheet.Questions.Select(x => x.Question).ToList();
         }
     }
 }

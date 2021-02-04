@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Domain.Answers;
 
 namespace Domain.AnswerSheets
 {
@@ -7,6 +8,6 @@ namespace Domain.AnswerSheets
     {
         CreatedAnswerSheetDTO Create(List<string> questions);
         AnswerSheet GetById(Guid id);
-        string[] GetQuestions(Guid id);
+        List<string> GetQuestions(Guid id);
     }
 }

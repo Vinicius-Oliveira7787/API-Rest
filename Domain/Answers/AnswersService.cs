@@ -8,7 +8,6 @@ namespace Domain.Answers
     {
         private readonly IAnswersRepository _answersRepository;
         private Answer _answer { get; set; }
-        private IList<string> _questions { get; set; }
         private double _score { get; set; }
 
         public AnswersService(IAnswersRepository answersRepository)
@@ -16,7 +15,7 @@ namespace Domain.Answers
             _answersRepository = answersRepository;
         }
 
-        public CreatedAnswerDTO Create(Guid answerSheetId, string[] questions)
+        public CreatedAnswerDTO Create(Guid answerSheetId, string questions)
         {
             var _answer = new Answer(answerSheetId, questions);
             var AnswerValidation = _answer.Validate();
@@ -30,18 +29,18 @@ namespace Domain.Answers
             return new CreatedAnswerDTO(AnswerValidation.errors);
         }
 
-        public double? CorrectExam(string[] exam) {
+        public double? CorrectExam(List<string> exam) {
             int correctAswersCounter = 0;
             
-            for (int i = 0; i < exam.Length; i++) {
+            for (int i = 0; i < exam.Count; i++) {
                 //   TeacherTemplate  /    StudentAswers
-                if (exam[i] == _answer.Answers[i]) {
+                if (exam[i] == _answer.Question) {
                     correctAswersCounter++;
                 }
             }
             
             // Calculating the score
-            double score = (correctAswersCounter / exam.Length) * 10;
+            double score = (correctAswersCounter / exam.Count) * 10;
             
             if (score > -1 && score < 11) {
                 _score = score;

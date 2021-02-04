@@ -16,11 +16,6 @@ namespace Infra
             builder
                 .Property(answerSheet => answerSheet.AnswerSheetId)
                 .IsRequired();
-
-            builder
-                .Property(answerSheet => answerSheet.Answers)
-                .IsRequired()
-                .IsRowVersion();
             
             builder
                 .Property(answerSheet => answerSheet.Id)
