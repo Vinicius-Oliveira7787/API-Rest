@@ -19,13 +19,18 @@ The Alf school apply multiple choices exams for the students. The student's scor
 * Docker-Compose
 * Visual Studio Code
 * VSCode SQL extention
-* Install cli migration as a `global tool dotnet tool install --global dotnet-ef`.
+* Install cli migration `global tool dotnet tool install --global dotnet-ef`.
 * (Optional) Program utilized for requisition: Postman
+
+
+### Start the Application
+
+To start the project use `docker-compose up` on the main paste then in the paste: Infra execute the command `dotnet ef migrations add <any name>`, last but not least at the WebApi paste use `dotnet run`.
 
 
 ### Funcionalities
 
-Start with the first migration `dotnet ef migrations add <any name>`. The system automatically register an admin users (teacher), that is necessary for criation of others users and exams. After starting migration, you need to create others users, students or teachers, then create another admin(teacher), that you will use his id for everthing.
+The system automatically register an admin users (teacher), that is necessary for criation of others users and exams. After starting migration, you need to create others users, students or teachers, then create another admin(teacher), that you will use his id for everthing.
 
 For register the answer sheet of the exam is necessary the id of a teacher and a list of questions.
 
@@ -38,21 +43,22 @@ To get approved students just need to send a Get request
 
 ### CheckList
 
-* Cadastrar gabarito da prova. Check
-* Cadastrar as respostas de cada aluno para cada prova. Check
+* Cadastrar gabarito da prova. ✔
+* Cadastrar as respostas de cada aluno para cada prova. ✔
 * Verificar a nota final de cada aluno.
-* Listar os alunos aprovados.
+* Listar os alunos aprovados. ✔
 
-* A nota total da prova é sempre maior que 0 e menor que 10. Check
-* A quantidade máxima de alunos é 100. Check
-* O peso de cada questão é sempre um inteiro maior que 0. Check
-* Os alunos aprovados tem média de notas maior do que 7. ToDO
-* A entrada e saída de dados deverá ser em JSON. Check
+* A nota total da prova é sempre maior que 0 e menor que 10. ✔
+* A quantidade máxima de alunos é 100. ✔
+* O peso de cada questão é sempre um inteiro maior que 0. ✔
+* Os alunos aprovados tem média de notas maior do que 7. ✔
+* A entrada e saída de dados deverá ser em JSON. ✔
 
 * Entrega dos requisitos obrigatórios: 6 pontos. Failed
-* Documentação: 1 ponto. Check
-* Testes unitários: 1 ponto. Check
-* Separação de camadas: 1 ponto. Check
-* API RESTFul: 1 ponto. Check
+* Documentação: 1 ponto. ✔
+* Testes unitários: 1 ponto. ✔
+* Separação de camadas: 1 ponto. ✔
+* API RESTFul: 1 ponto. ✔
+
 
 ##### Special thanks to: MATHEUS TALLMANN that helped with readme.
