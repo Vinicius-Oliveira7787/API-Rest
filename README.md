@@ -1,5 +1,3 @@
-# Desafio Código para todxs
-
 ### Purpouse
 
 The Alf school apply multiple choices exams for the students. The student's score is determined by weighted average of questions with weights of each questions. Each correct question sum 1 point, multiplicated by weight of each wrong question 0. The final score is the aritmetic avarage of all scores's exams.
@@ -41,11 +39,11 @@ After answered the exam, the program inform you with the score.
 To get approved students just need to send a Get request
 
 
-### CheckList
+### Business Rules
 
 * Cadastrar gabarito da prova. ✔
-* Cadastrar as respostas de cada aluno para cada prova. ✔
-* Verificar a nota final de cada aluno.
+* Cadastrar as respostas de cada aluno para cada prova. ❌
+* Verificar a nota final de cada aluno. ❌
 * Listar os alunos aprovados. ✔
 
 * A nota total da prova é sempre maior que 0 e menor que 10. ✔
@@ -54,11 +52,11 @@ To get approved students just need to send a Get request
 * Os alunos aprovados tem média de notas maior do que 7. ✔
 * A entrada e saída de dados deverá ser em JSON. ✔
 
-* Entrega dos requisitos obrigatórios: 6 pontos. Failed
-* Documentação: 1 ponto. ✔
-* Testes unitários: 1 ponto. ✔
-* Separação de camadas: 1 ponto. ✔
-* API RESTFul: 1 ponto. ✔
+* Entrega dos requisitos obrigatórios: 6 point. ❌
+* Documentação: 1 point. ✔
+* Testes unitários: 1 point. ✔
+* Separação de camadas: 1 point. ✔
+* API RESTFul: 1 point. ✔
 
 
 ##### Special thanks to: MATHEUS TALLMANN that helped with readme.
